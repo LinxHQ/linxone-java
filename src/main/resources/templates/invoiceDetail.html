@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        #inputItem{
+            opacity: 70%;
+            height: 50%;
+            border-top: hidden;
+            border-left: hidden;
+            border-right: hidden;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+  <body>
+
+<!--    Navbar-->
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="height: 2.5em;">
+            <a class="navbar-brand pl-5" href="#">
+                <i class="fa fa-home" aria-hidden="true"></i>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Invoices <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Expenses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contracts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Quotations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Payments</a>
+                    </li>
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">...</a>
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0 pr-5">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </li>  
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-suitcase" aria-hidden="true"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="..." alt="..." class="rounded-circle">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="container">
+<!--        Search-->
+        <div class="row pt-3">   
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                <legend class="font-weight-bold" style="color: green;">Draft</legend>
+            </div>
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                <div class="form-group">
+                  <input type="text" style="border-radius: 30px;" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search">
+                </div>
+            </div>
+        </div>
+        <hr>
+
+<!--        Invoice-->
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+
+<!--                Information-->
+                <div class="row">
+
+<!--                    CustomerInfor-->
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                        <legend>Customer Information</legend>
+                        <!-- Button trigger modal -->
+                        <a data-toggle="modal" data-target="#customerModal" style="font-weight: bold;" class="text-muted" id="customerName">
+                            Choose customer
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <h5 class="modal-title">Select Customer</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                                	<p th:if="${customers.size()==0}">Not found</p>
+                                                    <select id="customerIdSelect" class="form-control" required="required">
+                                                        <option value=""> -- </option>
+                                                        <option th:each="customer : ${customers}"
+                                                                th:value="${customer.id}"
+                                                                th:utext="${customer.name}">
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" onclick="btnSaveCustomerClick()" data-dismiss="modal">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- Button trigger modal -->
+                        <a data-toggle="modal" data-target="#customerAddressModal" class="text-muted" id="customerAddress">
+                            Choose billing address
+                        </a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="customerAddressModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <h5 class="modal-title">Select Customer Address</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                                    <select id="addressSelect"  class="form-control" required="required">
+                                                        <option>--</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                            <!-- Button trigger modal -->
+                        <a data-toggle="modal" data-target="#contactModal" class="text-muted">
+                            Choose contact
+                            </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Select  Attention</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                                        <select name="" id="input" class="form-control" required="required">
+                                                            <option value=""></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary">Save</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                            <!-- Button trigger modal -->
+                        <a data-toggle="modal" data-target="#subjectModal" class="text-muted">
+                            Enter invoice subject
+                            </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="subjectModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                            <div class="modal-header">
+                                                    <h5 class="modal-title">Enter subject</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                </div>
+                                        <div class="modal-body">
+                                            <div class="container-fluid">
+                                                <input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary">Save</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+  
+                    </div>
+
+<!--                    InvoieInfo-->
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                        <table class="table-sm">
+                            <tr>
+                                <th>Date</th>
+                                <td style="text-right">16/03/2020</td>
+                            </tr>
+                            <tr>
+                                <th>Term</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Currency</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Create by</th>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <hr style="border: none;height: 5px;color: darkgreen;background-color: darkgreen;">
+
+<!--                Item-->
+                <div class="row">
+                    <table class="table" >
+                        <thead class="thead-dark" >
+                          <tr style="font-weight: bold">
+                            <td scope="col" style="border-right: 2px solid white;">#</td>
+                            <td scope="col" style="width: 50%; border-right: 2px solid white;">Item</td>
+                            <td scope="col" style="border-right: 2px solid white;">Quantity</td>
+                            <td scope="col" style="border-right: 2px solid white;">Unit price</td>
+                            <td scope="col">Total</td>
+                          </tr>
+                        </thead>
+                        <tbody id="tblItem">
+                          <tr>
+                            <td scope="row">1</td>
+                            <td>
+                                <i class="fa fa-trash pt-2" aria-hidden="true" style="float: left;" title="Delete item"></i>
+                                <div class="col-sm-8" style="float: left;">
+                                    <input type="text" name="" id="inputItem" class="form-control" value="" required="required" >
+                                </div>
+                                <!-- Item modal -->
+                                <a data-toggle="modal" data-target="#itemModal">
+                                    <i class="fa fa-list pt-2" aria-hidden="true" title="Select from list"></i>
+                                </a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Item template</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="form-group">
+                                                            <input type="search" name="" id="input" class="form-control" value="" required="required" title="" style="float: left; border-radius: 20px; height: 90%;" placeholder="Search">
+                                                        </div>
+                                                        <br>
+                                                        <table class="table table-striped" style="border: outset;" >
+                                                            <thead>
+                                                                <tr style="border-bottom: outset;">
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Item</th>
+                                                                    <th scope="col">Unit Price</th>
+                                                                    <th scope="col"></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Mark</td>
+                                                                    <td>Otto</td>
+                                                                    <td><a href="#">insert</a></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><input type="number" name="" id="inputItem" class="form-control" value="" required="required"  ></td>
+                            <td><input type="text" name="" id="inputItem" class="form-control" value="" required="required" ></td>
+                            <td><input type="text" name="" id="inputItem" class="form-control" value="" required="required" ></td>
+                          </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" id="btnAddItem"><i class="fa fa-plus-circle" aria-hidden="true"></i>Add item</a>
+                </div>
+                <br>
+
+<!--                Subtotal-->
+                <div class="row">
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"></div>
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="text-center" style="font-weight: bolder;">Sub total</p>
+                                <a class="text-muted" style="font-size: small;" href="#" id="btnAddDiscount">
+                                    <i class="fa fa-plus" aria-hidden="true" ></i>
+                                    Add discount
+                                </a>
+                                <table class="table" id="tblDiscount">
+                                    <tr>
+                                        <td>
+                                            <i class="fa fa-trash pt-2" aria-hidden="true"></i>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="" id="inputItem" class="form-control" value="" required="required" placeholder="Discount"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="" id="inputItem" class="form-control" value="" required="required">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i class="fa fa-trash pt-2" aria-hidden="true"></i>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="" id="inputItem" class="form-control" value="" required="required" placeholder="Discount"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="" id="inputItem" class="form-control" value="" required="required">
+                                        </td>
+                                    </tr>
+                                </table>
+                                <a class="text-muted" style="font-size: small;" href="#" id="btnAddTax">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    Add tax
+                                </a>
+                                <table class="table" id="tblTax">
+                                    <tr>
+                                        <td>
+                                            <i class="fa fa-trash pt-2" aria-hidden="true"></i>
+                                        </td>
+                                        <td style="width: 46%;">
+                                            <select name="" id="inputItem" class="form-control" required="required">
+                                                <option value=""></option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="" id="inputItem" class="form-control" value="" required="required">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i class="fa fa-trash pt-2" aria-hidden="true"></i>
+                                        </td>
+                                        <td>
+                                            <select name="" id="inputItem" class="form-control" required="required">
+                                                <option value=""></option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="" id="inputItem" class="form-control" value="" required="required">
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <th style="width: 46%;">
+                                            Total
+                                        </th>
+                                        <td>
+                                            <input type="text" name="" id="inputItem" class="form-control" value="" required="required">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <th>Paid</th>
+                                        <td>
+                                            <input type="text" name="" id="inputItem" class="form-control" value="" required="required">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <th>Outstanding</th>
+                                        <td>
+                                            <input type="text" name="" id="inputItem" class="form-control" value="" required="required">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!--        Payment-->
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">Payment</div>
+            <div class="card-body" style="background-color: aliceblue;">
+              <h5 class="card-title">Success card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+
+    </div>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Optional JavaScript -->
+
+    <script type="text/javascript">
+        function btnSaveCustomerClick(){
+            var idCustomer = document.getElementById("customerIdSelect").value;
+            console.log(idCustomer);
+            $.ajax({
+                type: 'get',
+                url: '/api/customer/get/'+idCustomer,
+                header : {
+                    "Content-Type" : "application/json"
+                },
+                contentType : 'application/json',
+                dataType: 'json',
+                success: function(customer) {
+                    $("#customerName").html(customer.name);
+                    var address = customer.address;
+                    var html = "City: "+ address.city + " Phone: "+address.phone1+" Website: "+address.websiteUrl;
+
+                    $("#customerAddress").html(html);
+
+                    console.log(customer);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Fail
+                }
+            });
+        }
+
+
+        var invoice={};
+        var customer = [];
+
+        $('#customerModal').on('show.bs.modal', event => {
+            var button = $(event.relatedTarget);
+            var modal = $(this);
+            // Use above variables to manipulate the DOM
+
+        });
+        $('#billingAddressModal').on('show.bs.modal', event => {
+            var button = $(event.relatedTarget);
+            var modal = $(this);
+            // Use above variables to manipulate the DOM
+
+        });
+        $('#contactModal').on('show.bs.modal', event => {
+            var button = $(event.relatedTarget);
+            var modal = $(this);
+            // Use above variables to manipulate the DOM
+
+        });
+        $('#subjectModal').on('show.bs.modal', event => {
+            var button = $(event.relatedTarget);
+            var modal = $(this);
+            // Use above variables to manipulate the DOM
+
+        });
+        $('#itemModal').on('show.bs.modal', event => {
+            var button = $(event.relatedTarget);
+            var modal = $(this);
+            // Use above variables to manipulate the DOM
+
+        });
+        var index = 1;
+
+        $("#btnAddItem").click(function(){
+            index += 1;
+            $("#tblItem").append('<tr>'+
+                '<td scope="row">'+index+'</td>'
+                +'<td>'
+                +'<i class="fa fa-trash pt-2" aria-hidden="true" style="float: left;" title="Delete item"></i>'
+                +'<div class="col-sm-8" style="float: left;">'
+                +'<input type="text" name="" id="inputItem" class="form-control" >'
+                +'</div>'
+                +'<a data-toggle="modal" data-target="#itemModal">'
+                +'<i class="fa fa-list pt-2" aria-hidden="true" title="Select from list"></i>'
+                +'</a>'
+                +'</td>'
+                +'<td><input type="number" name="" id="inputItem" class="form-control"></td>'
+                +'<td><input type="text" name="" id="inputItem" class="form-control" ></td>'
+                +'<td><input type="text" name="" id="inputItem" class="form-control" ></td>'
+                +'</tr>');
+        });
+
+
+        $("#btnAddDiscount").click(function(){
+            $("#tblDiscount").append("<li>Appended item</li>");
+        });
+        $("#btnAddTax").click(function(){
+            $("#tblTax").append("<li>Appended item</li>");
+        });
+    </script>
+</body>
+</html>
