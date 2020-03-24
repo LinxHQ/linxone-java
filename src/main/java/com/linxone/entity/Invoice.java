@@ -2,21 +2,15 @@ package com.linxone.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "lb_invoices")
-@NoArgsConstructor
 @Getter
 @Setter
 public class Invoice implements Serializable{
@@ -37,6 +31,9 @@ public class Invoice implements Serializable{
 	
 	@Column(name = "lb_invoice_customer_id")
 	private Customer customer;
+
+	@OneToMany(mappedBy = "invoice")
+	private List<InvoiceItem> invoiceItems;
 	
 	@Column(name = "lb_invoice_subject")
 	private String subject;
@@ -46,4 +43,14 @@ public class Invoice implements Serializable{
 	
 	@Column(name = "lb_invoice_encode")
 	private String encode;
+
+	public Invoice() {
+	}
+
+	public Invoice(Customer customer, Date date, List<InvoiceItem> invoiceItems) {
+		this.customer = customer;
+		this.date = date;
+		this.invoiceItems = invoiceItems;
+	}
+
 }

@@ -251,7 +251,28 @@
                         <table class="table-sm">
                             <tr>
                                 <th>Date</th>
-                                <td style="text-right">16/03/2020</td>
+                                <td style="text-right"><a data-toggle="modal" data-target="#dateModal" class="text-muted" id="date">Enter date</a></td>
+                                <!-- Modal -->
+                                <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Enter date</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <input type="date" name="" id="inputDate" class="form-control" value="" required="required" pattern="" title="">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="btnSaveDateClick()">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </tr>
                             <tr>
                                 <th>Term</th>
@@ -283,19 +304,19 @@
                           </tr>
                         </thead>
                         <tbody id="tblItem">
-                          <tr>
-                            <td scope="row">1</td>
+                          <tr id="item1">
+                            <td scope="row">1<input type="hidden" id="idProductItem1" value="0"/></td>
                             <td>
-                                <i class="fa fa-trash pt-2" aria-hidden="true" style="float: left;" title="Delete item"></i>
+                                <i class="fa fa-trash pt-2" aria-hidden="true" style="float: left;" title="Delete item" onclick="deleteItemByNumber(1)"></i>
                                 <div class="col-sm-8" style="float: left;">
-                                    <input type="text" name="" id="inputItem" class="form-control" value="" required="required" >
+                                    <input type="text" name="" id="inputItemName1" class="form-control" value="" required="required" >
                                 </div>
                                 <!-- Item modal -->
-                                <a data-toggle="modal" data-target="#itemModal">
+                                <a data-toggle="modal" data-target="#itemModal1">
                                     <i class="fa fa-list pt-2" aria-hidden="true" title="Select from list"></i>
                                 </a>
                                 <!-- Modal -->
-                                <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                <div class="modal fade" id="itemModal1" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -314,19 +335,12 @@
                                                         <table class="table table-striped" style="border: outset;" >
                                                             <thead>
                                                                 <tr style="border-bottom: outset;">
-                                                                    <th scope="col">#</th>
                                                                     <th scope="col">Item</th>
                                                                     <th scope="col">Unit Price</th>
                                                                     <th scope="col"></th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>Mark</td>
-                                                                    <td>Otto</td>
-                                                                    <td><a href="#">insert</a></td>
-                                                                </tr>
+                                                            <tbody id="listProduct1">
                                                             </tbody>
                                                         </table>
                                                         
@@ -337,9 +351,9 @@
                                     </div>
                                 </div>
                             </td>
-                            <td><input type="number" name="" id="inputItem" class="form-control" value="" required="required"  ></td>
-                            <td><input type="text" name="" id="inputItem" class="form-control" value="" required="required" ></td>
-                            <td><input type="text" name="" id="inputItem" class="form-control" value="" required="required" ></td>
+                            <td><input type="number" name="" id="inputItemQuantity1" class="form-control" value="1" required="required"  onchange="change();"></td>
+                            <td><input type="text" name="" id="inputItemUnitPrice1" class="form-control" value="0" required="required" disabled></td>
+                            <td><input type="text" name="" id="inputItemTotal1" class="form-control" value="0" required="required" disabled></td>
                           </tr>
                         </tbody>
                     </table>
@@ -352,8 +366,13 @@
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"></div>
                     <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                         <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-6" style="font-weight: bolder;">Sub total:</div>
+                                    <div class="col-md-6"><input type="text" name="" id="inputSubTotal" class="form-control" value="0" required="required" disabled/></div>
+                                </div>
+                            </div>
                             <div class="card-body">
-                                <p class="text-center" style="font-weight: bolder;">Sub total</p>
                                 <a class="text-muted" style="font-size: small;" href="#" id="btnAddDiscount">
                                     <i class="fa fa-plus" aria-hidden="true" ></i>
                                     Add discount
@@ -458,9 +477,18 @@
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
           </div>
-
+        <hr style="border: none;height: 5px;color: darkgreen;background-color: darkgreen;">
+        <div class="row pt-3 pb-3">
+            <div class="col-md-3"></div>
+            <div class="col--md-6">
+                <button class="btn btn-success" onclick="saveInvoice();">Save</button>
+            </div>
+        </div>
     </div>
 
+    <div class="container-fluid bg-dark pt-2">
+        <div style="color: white">Sunchinsusu</div>
+    </div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -471,9 +499,155 @@
     <!-- Optional JavaScript -->
 
     <script type="text/javascript">
+        var listProduct;
+        var listItem = new Array();
+        var subTotal;
+        var invoiceCustomer = new Object();
+        var invoiceDate;
+        var invoice = new Object();
+
+        function saveInvoice(){
+            subTotal = 0;
+
+            invoice = {
+                customer : {
+                    id : invoiceCustomer.id
+                },
+                date : invoiceDate,
+            }
+            var invoiceJson = JSON.stringify(invoice);
+            console.log(invoiceJson);
+            $.ajax({
+                type: 'POST',
+                url: '/api/invoice/create',
+                header : {
+                    "Content-Type" : "application/json"
+                },
+                contentType : 'application/json',
+                data : invoiceJson,
+                dataType: 'json',
+                success: function(newInvoice) {
+                    for(var i = 1; i <= index; i++){
+                        var idItem = "item"+i;
+                        if(document.getElementById(idItem) != null){
+                            var idProductStr = "#idProductItem"+i;
+                            var idProduct = $(idProductStr).val();
+                            var product;
+                            console.log("List Product : ");
+                            for(var p = 0; p< listProduct.length; p++){
+                                if(listProduct[p].id == idProduct){
+                                    product = listProduct[p];
+                                }
+                            }
+                            var idInputItemUnitPrice = "#inputItemUnitPrice"+i;
+                            var idInputItemQuantity = "#inputItemQuantity"+i;
+                            var unitPrice = $(idInputItemUnitPrice).val() ;
+                            var quantity = $(idInputItemQuantity).val() ;
+                            var total = unitPrice * quantity;
+                            var item = {
+                                invoice : {
+                                    id : newInvoice.id
+                                },
+                                catalogProduct : product,
+                                quantity : quantity,
+                                value : unitPrice,
+                                total : total
+                            }
+                            listItem.push(item);
+                            subTotal += total;
+                        }
+                    }
+                    var listItemJson = JSON.stringify(listItem);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/invoiceItem/create/list',
+                        header : {
+                            "Content-Type" : "application/json"
+                        },
+                        contentType : 'application/json',
+                        data : listItemJson,
+                        dataType: 'json',
+                        success: function(newListItem) {
+                            alert("Success");
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            // Fail
+                            alert("Fail");
+                        }
+
+                })},
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Fail
+                    alert("Fail");
+                }
+            });
+        }
+
+        function change(){
+            subTotal = 0;
+            for(var i = 1; i <= index; i++){
+                var idItem = "item"+i;
+                if(document.getElementById(idItem) != null){
+                    // change Html
+                    var idInputItemUnitPrice = "#inputItemUnitPrice"+i;
+                    var idInputItemQuantity = "#inputItemQuantity"+i;
+                    var unitPrice = $(idInputItemUnitPrice).val() ;
+                    var quantity = $(idInputItemQuantity).val() ;
+                    var total = unitPrice * quantity;
+                    subTotal += total;
+                    var idInputItemTotal = "inputItemTotal"+i;
+                    document.getElementById(idInputItemTotal).setAttribute("value", total);
+                }
+            }
+            document.getElementById("inputSubTotal").setAttribute("value", subTotal);
+        }
+
+        function deleteItemByNumber(number){
+            var idItem = "#item"+number;
+            $(idItem).remove();
+            change();
+        };
+
+        function insertProductById(idProduct, itemNumber){
+            console.log(idProduct);
+            var product;
+            for(var i = 0; i< listProduct.length; i++){
+                if(listProduct[i].id === idProduct){
+                    product = listProduct[i];
+                }
+            }
+            document.getElementById("idProductItem"+itemNumber).setAttribute("value", product.id);
+            document.getElementById("inputItemName"+itemNumber).setAttribute("value", product.name);
+            document.getElementById("inputItemUnitPrice"+itemNumber).setAttribute("value", product.price);
+            document.getElementById("inputItemTotal"+itemNumber).setAttribute("value", product.price);
+            change();
+        }
+
+        window.onload = function(){
+            $.ajax({
+                type: 'get',
+                url: '/api/catalogProduct/get',
+                header : {
+                    "Content-Type" : "application/json"
+                },
+                contentType : 'application/json',
+                dataType: 'json',
+                success: function(products) {
+                    listProduct = products;
+                    for (var i = 0; i < products.length; i++){
+                        $("#listProduct1").append('<tr><td>'+products[i].name+'</td><td>'+products[i].price+'</td><td ><a href="#" onclick="insertProductById('+products[i].id+',1)" data-dismiss="modal">insert</a></td></tr>');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Fail
+                }
+            });
+        };
+
+
+
         function btnSaveCustomerClick(){
             var idCustomer = document.getElementById("customerIdSelect").value;
-            console.log(idCustomer);
             $.ajax({
                 type: 'get',
                 url: '/api/customer/get/'+idCustomer,
@@ -483,9 +657,10 @@
                 contentType : 'application/json',
                 dataType: 'json',
                 success: function(customer) {
+                    invoiceCustomer = customer;
                     $("#customerName").html(customer.name);
                     var address = customer.address;
-                    var html = "City: "+ address.city + " Phone: "+address.phone1+" Website: "+address.websiteUrl;
+                    var html = "ADDRESS: City: "+ address.city + " Phone: "+address.phone1+" Website: "+address.websiteUrl;
 
                     $("#customerAddress").html(html);
 
@@ -497,9 +672,14 @@
             });
         }
 
-
-        var invoice={};
-        var customer = [];
+        function btnSaveDateClick(){
+            var date = document.getElementById("inputDate").value;
+            if(date === ""){
+                date = "Enter date";
+            }
+            invoiceDate = date;
+            $("#date").html(date);
+        }
 
         $('#customerModal').on('show.bs.modal', event => {
             var button = $(event.relatedTarget);
@@ -535,21 +715,60 @@
 
         $("#btnAddItem").click(function(){
             index += 1;
-            $("#tblItem").append('<tr>'+
-                '<td scope="row">'+index+'</td>'
+            $("#tblItem").append(
+                '<tr id="item'+index+'">'
+                +'<td scope="row">'+index+'<input type="hidden" id="idProductItem'+index+'" value="0"/></td>'
                 +'<td>'
-                +'<i class="fa fa-trash pt-2" aria-hidden="true" style="float: left;" title="Delete item"></i>'
+                +'<i class="fa fa-trash pt-2" aria-hidden="true" style="float: left;" title="Delete item" onclick="deleteItemByNumber('+index+')"></i>'
                 +'<div class="col-sm-8" style="float: left;">'
-                +'<input type="text" name="" id="inputItem" class="form-control" >'
+                +'<input type="text" name="" id="inputItemName'+index+'" class="form-control" value="" required="required" >'
                 +'</div>'
-                +'<a data-toggle="modal" data-target="#itemModal">'
+                +'<a data-toggle="modal" data-target="#itemModal'+index+'">'
                 +'<i class="fa fa-list pt-2" aria-hidden="true" title="Select from list"></i>'
                 +'</a>'
+                +'<div class="modal fade" id="itemModal'+index+'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">'
+                +'<div class="modal-dialog" role="document">'
+                +'<div class="modal-content">'
+                +'<div class="modal-header">'
+                +'<h5 class="modal-title">Item template</h5>'
+                +'<button type="button" class="close" data-dismiss="modal" aria-label="Close">'
+                +'<span aria-hidden="true">&times;</span>'
+                +'</button>'
+                +'</div>'
+                +'<div class="modal-body">'
+                +'<div class="container-fluid">'
+                +'<div class="row">'
+                +'<div class="form-group">'
+                +'<input type="search" name="" id="input" class="form-control" value="" required="required" title="" style="float: left; border-radius: 20px; height: 90%;" placeholder="Search">'
+                +'</div>'
+                +'<br>'
+                +'<table class="table table-striped" style="border: outset;" >'
+                +'<thead>'
+                +'<tr style="border-bottom: outset;">'
+                +'<th scope="col">Item</th>'
+                +'<th scope="col">Unit Price</th>'
+                +'<th scope="col"></th>'
+                +'</tr>'
+                +'</thead>'
+                +'<tbody id="listProduct'+index+'">'
+                +'</tbody>'
+                +'</table>'
+                +'</div>'
+                +'</div>'
+                +'</div>'
+                +'</div>'
+                +'</div>'
+                +'</div>'
                 +'</td>'
-                +'<td><input type="number" name="" id="inputItem" class="form-control"></td>'
-                +'<td><input type="text" name="" id="inputItem" class="form-control" ></td>'
-                +'<td><input type="text" name="" id="inputItem" class="form-control" ></td>'
-                +'</tr>');
+                +'<td><input type="number" name="" id="inputItemQuantity'+index+'" class="form-control" value="1" required="required" onchange="change();" ></td>'
+                +'<td><input type="text" name="" id="inputItemUnitPrice'+index+'" class="form-control" value="0" required="required"  disabled></td>'
+                +'<td><input type="text" name="" id="inputItemTotal'+index+'" class="form-control" value="0" required="required"  disabled></td>'
+                +'</tr>'
+            );
+            var idListProduct = "#listProduct"+index;
+            for (var i = 0; i < listProduct.length; i++){
+                $(idListProduct).append('<tr><td>'+listProduct[i].name+'</td><td>'+listProduct[i].price+'</td><td ><a href="#" onclick="insertProductById('+listProduct[i].id+','+index+')" data-dismiss="modal">insert</a></td></tr>');
+            }
         });
 
 

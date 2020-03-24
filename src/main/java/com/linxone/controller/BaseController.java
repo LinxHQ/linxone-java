@@ -15,26 +15,26 @@ import com.linxone.service.InvoiceService;
 public class BaseController {
 	@Autowired InvoiceService invoiceSer;
 	
-	@RequestMapping({"/","/user"})
+	@RequestMapping(value ="/")
 	public String home(Model model) {
 		List<Invoice> invoices = invoiceSer.getAll();
 		model.addAttribute("invoices", invoices);
 		return "home";
 	}
 	
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
-	
-	@RequestMapping("/logout")
-	public String logout() {
-		return "logout";
-	}
-	
-	@RequestMapping("/403")
-	public String error() {
-		return "403";
-	}
+//	@RequestMapping("/login")
+//	public String login() {
+//		return "login";
+//	}
+//
+//	@RequestMapping("/logout")
+//	public String logout() {
+//		return "logout";
+//	}
+//
+//	@RequestMapping("/403")
+//	public String error() {
+//		return "403";
+//	}
 	
 }

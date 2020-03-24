@@ -28,11 +28,9 @@ public class InvoiceController {
 	
 	@GetMapping("/new")
 	public String newInvoice(Model model) {
-		List<CatalogProduct> catalogProducts = catalogProductSer.getAll();
 		List<Address> addresses = addressSer.getAll();
 		List<Customer> customers = customerSer.getAll();
-		
-		model.addAttribute("catalogProducts", catalogProducts);
+
 		model.addAttribute("addresses", addresses);
 		model.addAttribute("customers", customers);
 		return "invoiceDetail";

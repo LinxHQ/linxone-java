@@ -15,25 +15,23 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "lb_catalog_products")
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 public class CatalogProduct implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "lb_record_primary_key")
-	private int id;
+	private Integer id;
 	
 	@Column(name = "lb_product_name")
-	private String productName;
+	private String name;
 	
 	@Column(name = "lb_product_price")
-	private float productPrice;
-	
-	@Column(name = "lb_product_tax")
-	private float productTax;
+	private float price;
 	
 	@Column(name = "lb_product_description")
-	private String productDescription;
+	private String description;
+
 }

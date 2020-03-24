@@ -2,14 +2,7 @@ package com.linxone.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,7 +21,7 @@ public class InvoiceItem implements Serializable{
 	@Column(name = "lb_record_primary_key")
 	private int id;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "lb_invoice_id")
 	private Invoice invoice;
 	

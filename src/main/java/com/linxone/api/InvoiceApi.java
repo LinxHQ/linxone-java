@@ -15,27 +15,28 @@ import com.linxone.entity.Invoice;
 import com.linxone.service.InvoiceService;
 
 @RestController
-@RequestMapping("/api/invoice")
+@RequestMapping(value = "/api/invoice")
 public class InvoiceApi {
 	@Autowired InvoiceService invoiceSer;
 	
-	@GetMapping({"/get","/"})
+	@GetMapping(value = {"/get","/"})
 	public ResponseEntity<List<Invoice>> get(){
 		return new ResponseEntity<>(invoiceSer.getAll(), HttpStatus.OK);
 	}
 	
-	@PostMapping("/create")
+	@PostMapping(value = "/create")
 	public ResponseEntity<Invoice> create(@RequestBody Invoice invoice){
-		return new ResponseEntity<>(invoiceSer.add(invoice), HttpStatus.OK);
+		Invoice newInvoice = invoiceSer.add(invoice);
+		return new ResponseEntity<>(newInvoice, HttpStatus.OK);
 	}
 	
-	@PostMapping("/update")
+	@PostMapping(value = "/update")
 	public ResponseEntity<Invoice> update(@RequestBody Invoice invoice){
 		return new ResponseEntity<>(invoiceSer.update(invoice), HttpStatus.OK);
 	}
 	
-	@PostMapping("/delete")
+	@PostMapping(value = "/delete")
 	public ResponseEntity<Invoice> delete(@RequestBody Invoice invoice){
-		return new ResponseEntity<>(invoiceSer.add(invoice), HttpStatus.OK);
+		return new ResponseEntity<>(invoiceSer.add(invoice), HttpStatus.NO_CONTENT);
 	}
 }

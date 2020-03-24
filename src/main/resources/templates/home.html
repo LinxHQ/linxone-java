@@ -138,8 +138,9 @@
             <tbody>
                 <tr th:each ="invoice : ${invoices}">
                     <th><span class="badge badge-pill badge-secondary" th:utext="${invoice.encode}"></span></th>
-                    <td th:utext="${invoice.customer.name}">invoice.customer.name</td>
-                    <td th:utext="${invoice.date}">invoice.date</td>
+<!--                    <td th:utext="${invoice.customer.getName()}">name</td>-->
+                    <td></td>
+                    <td th:utext="${invoice.date}"></td>
                     <td><a href="/user/invoice/detail/${invoice.id}">View detail</a></td>
                 </tr>
             </tbody>
