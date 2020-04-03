@@ -9,6 +9,7 @@ LinxOne-Java will be brought to you using the following technology stack:
 5. Thymleaf & Bootstrap
 6. Jasper Report
 7. MySQL
+8. ReactJS
 
 Feel free to contact us if you'd like to whitelabel our product. We'll provide support for branding, implemention, and further heavy customisation :)
 
