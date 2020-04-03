@@ -39,6 +39,7 @@ public class CatalogProductApi {
 
     @PostMapping("/delete")
     public ResponseEntity<CatalogProduct> delete(@RequestBody CatalogProduct catalogProduct) {
-        return new ResponseEntity<>(catalogProductSer.add(catalogProduct), HttpStatus.OK);
+        catalogProductSer.delete(catalogProduct);
+        return ResponseEntity.ok().build();
     }
 }

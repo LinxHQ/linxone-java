@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/customer")
 public class CustomerApi {
         @Autowired
@@ -17,7 +19,12 @@ public class CustomerApi {
 
         @GetMapping({"/get","/"})
         public ResponseEntity<List<Customer>> get(){
-            return new ResponseEntity<>(customerSer.getAll(), HttpStatus.OK);
+            ArrayList<Customer> customers = new ArrayList<>(customerSer.getAll());
+            ArrayList<Customer> customers1 = new ArrayList<>();
+            for(Customer customer : customers){
+                customers1.add(customer);
+            }
+            return new ResponseEntity<>(customers1, HttpStatus.OK);
         }
 
         @GetMapping({"/get/{id}"})

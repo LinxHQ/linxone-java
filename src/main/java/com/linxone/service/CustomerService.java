@@ -1,5 +1,6 @@
 package com.linxone.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +32,5 @@ public class CustomerService {
 	public void delete(Customer customer) {
 		customerRepo.delete(customer);
 	}
+
 }

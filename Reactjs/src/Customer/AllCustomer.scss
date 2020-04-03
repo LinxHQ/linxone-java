@@ -1,0 +1,27 @@
+.titlePage{
+    font-family: Arial;
+    font-size: x-large;
+    font-weight: bold;
+    color: gray;
+}
+.line{
+    border: none;
+    height: 5px;
+    color: darkgreen;
+    background-color: darkgreen;
+}
+.action{
+    color: black;
+    padding-right: 10%;
+    float: left;
+}
+
+.link{
+
+    font-family: Arial;
+    font-size: medium;
+    font-weight: bold;
+    .icon{
+        padding-right: 5px;
+    }
+}

@@ -37,6 +37,7 @@ public class InvoiceApi {
 	
 	@PostMapping(value = "/delete")
 	public ResponseEntity<Invoice> delete(@RequestBody Invoice invoice){
-		return new ResponseEntity<>(invoiceSer.add(invoice), HttpStatus.NO_CONTENT);
+		invoiceSer.delete(invoice);
+		return ResponseEntity.ok().build();
 	}
 }

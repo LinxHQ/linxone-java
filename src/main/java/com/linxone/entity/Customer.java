@@ -1,25 +1,13 @@
 package com.linxone.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "lb_customers")
-@NoArgsConstructor
-@Getter
-@Setter
 public class Customer implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -30,12 +18,59 @@ public class Customer implements Serializable{
 	
 	@Column(name = "lb_customer_name")
 	private String name;
-	
-	@OneToOne
-	@JoinColumn(name = "lb_address_id")
-	private Address address;
-	
+
+
 	@OneToOne
 	@JoinColumn(name = "lb_customer_tax_id")
 	private Tax tax;
+
+	@Column(name = "lb_customer_registration")
+	private String registration;
+
+	@Column(name = "lb_customer_type")
+	private String type;
+
+	public Customer() {
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Tax getTax() {
+		return tax;
+	}
+
+	public void setTax(Tax tax) {
+		this.tax = tax;
+	}
+
+	public String getRegistration() {
+		return registration;
+	}
+
+	public void setRegistration(String registration) {
+		this.registration = registration;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 }
