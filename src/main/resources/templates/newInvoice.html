@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .inputSubtotal{
+            opacity: 70%;
+            height: 50%;
+            border-top: hidden;
+            border-left: hidden;
+            border-right: hidden;
+        }
+    </style>
+
+</head>
+  <body>
+
+<!--    Navbar-->
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="height: 2.5em;">
+            <a class="navbar-brand pl-5" href="#">
+                <i class="fa fa-home" aria-hidden="true"></i>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Invoices <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Expenses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contracts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Quotations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Payments</a>
+                    </li>
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">...</a>
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0 pr-5">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </li>  
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-suitcase" aria-hidden="true"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="..." alt="..." class="rounded-circle">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="container">
+<!--        Search-->
+        <div class="row pt-3">   
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                <legend class="font-weight-bold" style="color: green;">Draft</legend>
+            </div>
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                <div class="form-group">
+                  <input type="text" style="border-radius: 30px;" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Search">
+                </div>
+            </div>
+        </div>
+        <hr>
+
+<!--        Invoice-->
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+
+<!--                Information-->
+                <div class="row">
+
+<!--                    CustomerInfor-->
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                        <legend>Customer Information</legend>
+                        <!-- Button trigger modal -->
+                        <a data-toggle="modal" data-target="#customerModal" style="font-weight: bold;" class="text-muted" id="customerName">
+                            Choose customer
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <h5 class="modal-title">Select Customer</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                                	<p th:if="${customers.size()==0}">Not found</p>
+                                                    <select id="customerIdSelect" class="form-control" required="required">
+                                                        <option value=""> -- </option>
+                                                        <option th:each="customer : ${customers}"
+                                                                th:value="${customer.id}"
+                                                                th:utext="${customer.name}">
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" onclick="btnSaveCustomerClick()" data-dismiss="modal">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- Button trigger modal -->
+                        <a data-toggle="modal" data-target="#customerAddressModal" class="text-muted" id="customerAddress">
+                            Choose billing address
+                        </a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="customerAddressModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <h5 class="modal-title">Select Customer Address</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                                    <select id="addressSelect"  class="form-control" required="required">
+                                                        <option>--</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                            <!-- Button trigger modal -->
+                        <a data-toggle="modal" data-target="#contactModal" class="text-muted">
+                            Choose contact
+                            </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Select  Attention</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                                        <select name="" id="input" class="form-control" required="required">
+                                                            <option value=""></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary">Save</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                            <!-- Button trigger modal -->
+                        <a data-toggle="modal" data-target="#subjectModal" class="text-muted">
+                            Enter invoice subject
+                            </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="subjectModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                            <div class="modal-header">
+                                                    <h5 class="modal-title">Enter subject</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                </div>
+                                        <div class="modal-body">
+                                            <div class="container-fluid">
+                                                <input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary">Save</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+  
+                    </div>
+
+<!--                    InvoieInfo-->
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                        <table class="table-sm">
+                            <tr>
+                                <th>Date</th>
+                                <td style="text-right"><a data-toggle="modal" data-target="#dateModal" class="text-muted" id="date">Enter date</a></td>
+                                <!-- Modal -->
+                                <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Enter date</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <input type="date" name="" id="inputDate" class="form-control" value="" required="required" pattern="" title="">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="btnSaveDateClick()">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+                            <tr>
+                                <th>Term</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Currency</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Create by</th>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <hr style="border: none;height: 5px;color: darkgreen;background-color: darkgreen;">
+                <br/>
+
+<!--                Item-->
+                <div class="row">
+                    <table class="table table-sm">
+                        <thead style=" background-color: rgb(80, 177, 80) ;color: aliceblue; font-family: Arial, Helvetica, sans-serif; text-align: center;">
+                          <tr style="font-weight: bold">
+                            <td scope="col" style="width: 50%; border-right: 2px solid white;">Item</td>
+                            <td scope="col" style="border-right: 2px solid white;">Quantity</td>
+                            <td scope="col" style="border-right: 2px solid white;">Unit price</td>
+                            <td scope="col">Total</td>
+                          </tr>
+                        </thead>
+                        <tbody id="tblItem">
+                          <tr id="item1">
+                            <td>
+                                <input type="hidden" id="idProductItem1" value="0"/>
+                                <i class="fa fa-trash pt-2" aria-hidden="true" style="float: left;" title="Delete item" onclick="deleteItemByNumber(1)"></i>
+                                <div class="col-sm-8" style="float: left;">
+                                    <input type="text" name="" id="inputItemName1" class="form-control" value="" required="required" >
+                                </div>
+                                <!-- Item modal -->
+                                <a data-toggle="modal" data-target="#itemModal1">
+                                    <i class="fa fa-list pt-2" aria-hidden="true" title="Select from list"></i>
+                                </a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="itemModal1" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Item template</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="form-group">
+                                                            <input type="search" name="" id="input" class="form-control" value="" required="required" title="" style="float: left; border-radius: 20px; height: 90%;" placeholder="Search">
+                                                        </div>
+                                                        <br>
+                                                        <table class="table table-striped" style="border: outset;" >
+                                                            <thead>
+                                                                <tr style="border-bottom: outset;">
+                                                                    <th scope="col">Item</th>
+                                                                    <th scope="col">Unit Price</th>
+                                                                    <th scope="col"></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="listProduct1">
+                                                            </tbody>
+                                                        </table>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><input type="number" name="" id="inputItemQuantity1" class="form-control" value="1" required="required"  onchange="change();"></td>
+                            <td><input type="number" name="" id="inputItemUnitPrice1" class="form-control" value="0" required="required" disabled></td>
+                            <td><input type="number" name="" id="inputItemTotal1" class="form-control" value="0" required="required" disabled></td>
+                          </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" id="btnAddItem"><i class="fa fa-plus-circle" aria-hidden="true"></i>Add item</a>
+                </div>
+                <br>
+
+<!--                Subtotal-->
+                <div class="row">
+                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"></div>
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-6" style="font-weight: bolder;">Sub total:</div>
+                                    <div class="col-md-6"><input type="number" name="" id="inputSubTotal" class="form-control" value="0" required="required" disabled/></div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <a class="text-muted" style="font-size: small;" href="#" id="btnAddDiscount">
+                                    <i class="fa fa-plus" aria-hidden="true" ></i>
+                                    Add discount
+                                </a>
+                                <table class="table" id="tblDiscount">
+
+                                </table>
+                                <a class="text-muted" style="font-size: small;" href="#" id="btnAddTax">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    Add tax
+                                </a>
+                                <table class="table" id="tblTax">
+
+                                </table>
+
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <th style="width: 46%;">
+                                            Total
+                                        </th>
+                                        <td>
+                                            <input type="number" name="" id="total" class="form-control" value="" required="required" disabled>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <th>Paid</th>
+                                        <td>
+                                            <input type="number" name="" id="inputPaid" class="form-control" value="0" required="required" disabled>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <th>Outstanding</th>
+                                        <td>
+                                            <input type="number" name="" id="inputOutstanding" class="form-control" value=""  disabled/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+<!--        Payment-->
+        <table class="table table-striped table-bordered">
+            <thead class="bg-success"
+                   style="color: aliceblue; font-family: Arial, Helvetica, sans-serif; text-align: center;">
+            <tr>
+                <th></th>
+                <th>Payment No</th>
+                <th>Payment Date</th>
+                <th>Method</th>
+                <th>Amount</th>
+                <th>Note</th>
+            </tr>
+            </thead>
+            <tbody id="tblPayment">
+            <tr id="payment1">
+                <td><i class="fa fa-trash" aria-hidden="true" onclick="deletePaymentByNumber(1)"></i></td>
+                <td>R-20190000035</td>
+                <td><input type="date" name="" id="inputPaymentDate1" class="form-control" value="" required="required" title=""></td>
+                <td>
+                    <select class="form-control" name="" id="selectPaymentMethod1">
+                        <option value="1">Master Card</option>
+                        <option value="2">Visa Card</option>
+                        <option value="3">Cash</option>
+                        <option value="4">Check</option>
+                        <option value="5">Other</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="number" name="" id="inputPaymentAmount1" class="form-control" required="required" value="0" onchange="change();"/>
+                </td>
+                <td>
+                    <textarea name="" id="inputPaymentNote1" class="form-control" rows="3" required="required" style="height: 50px;"></textarea>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="#" id="btnAddPayment">Add payment</a>
+        <br/><br/><br/>
+
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header" style="color: aliceblue; font-family: Arial, Helvetica, sans-serif; ">Note</div>
+            <div class="card-body" style="background-color: aliceblue;">
+                <a data-toggle="modal" data-target="#noteModal"><h6 style="color: gray; font-family: Arial">Click to enter note</h6></a>
+
+                <div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="noteModalLabel" style="color: gray;">Enter Note</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <textarea name="" id="input" class="form-control" rows="3" required="required" style="height: 100px;"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header" style="color: aliceblue; font-family: Arial, Helvetica, sans-serif;">Internal Note</div>
+            <div class="card-body" style="background-color: aliceblue;">
+                <a data-toggle="modal" data-target="#internalNoteModal"><h6 style="color: gray; font-family: Arial">Click to enter internal note</h6></a>
+
+                <div class="modal fade" id="internalNoteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="noteModalLabel" style="color: gray;">Enter Note</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <textarea name="" id="input" class="form-control" rows="3" required="required" style="height: 100px;"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header" style="color: aliceblue; font-family: Arial, Helvetica, sans-serif; ">Attachment</div>
+            <div class="card-body" style="background-color: aliceblue;">
+                <h5 class="card-title">Success card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+        <br/>
+        <hr style="border: none;height: 5px;color: darkgreen;background-color: darkgreen;">
+        <div class="row pt-3 pb-3">
+            <div class="col-md-3"></div>
+            <div class="col--md-6">
+                <button class="btn btn-success" onclick="saveInvoice();">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-dark pt-2">
+        <div style="color: white">Sunchinsusu</div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Optional JavaScript -->
+
+    <script type="text/javascript" src="/newInvoice.js"></script>
+</body>
+</html>

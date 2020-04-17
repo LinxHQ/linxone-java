@@ -8,4 +8,5 @@ import com.linxone.entity.InvoiceItem;
 @Repository
 public interface InvoiceItemRepository extends JpaRepository<InvoiceItem, Integer>{
 	InvoiceItem findById(int id);
+
 }

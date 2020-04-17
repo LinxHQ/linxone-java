@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.linxone.entity.Address;
-import com.linxone.entity.CatalogProduct;
 import com.linxone.entity.Customer;
 import com.linxone.entity.Invoice;
 import com.linxone.service.AddressService;
@@ -33,13 +32,14 @@ public class InvoiceController {
 
 		model.addAttribute("addresses", addresses);
 		model.addAttribute("customers", customers);
-		return "invoiceDetail";
+		return "newInvoice";
 	}
 	
 	@GetMapping("/detail/{id}")
 	public String invoiceDetail(Model model, @PathVariable(name = "id")int id) {
 		Invoice invoice = invoiceSer.getById(id);
 		model.addAttribute("invoice", invoice);
-		return "invoiceDetail";
+		return "newInvoice";
 	}
+
 }

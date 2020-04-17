@@ -5,11 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.linxone.entity.Invoice;
 import com.linxone.service.InvoiceService;
@@ -23,7 +19,12 @@ public class InvoiceApi {
 	public ResponseEntity<List<Invoice>> get(){
 		return new ResponseEntity<>(invoiceSer.getAll(), HttpStatus.OK);
 	}
-	
+
+	@GetMapping(value = "/getByIdCustomer/{id}")
+	public ResponseEntity<List<Invoice>> getByIdCustomer(@PathVariable(name = "id") int id){
+		return new ResponseEntity<>(invoiceSer.getByCustomerId(id), HttpStatus.OK);
+	}
+
 	@PostMapping(value = "/create")
 	public ResponseEntity<Invoice> create(@RequestBody Invoice invoice){
 		Invoice newInvoice = invoiceSer.add(invoice);

@@ -19,6 +19,10 @@ public class InvoiceService {
 	public Invoice getById(int id) {
 		return invoiceRepo.findById(id);
 	}
+
+	public List<Invoice> getByCustomerId(int id){
+		return invoiceRepo.findByCustomerId(id);
+	}
 	
 	public Invoice add(Invoice invoice) {
 		return invoiceRepo.save(invoice);

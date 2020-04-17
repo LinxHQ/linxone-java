@@ -43,7 +43,8 @@ public class CustomerApi {
         }
 
         @PostMapping("/delete")
-        public ResponseEntity<Customer> delete(@RequestBody Customer customer) {
-            return new ResponseEntity<>(customerSer.add(customer), HttpStatus.OK);
+        public ResponseEntity<List<Customer>> delete(@RequestBody Customer customer) {
+            customerSer.delete(customer);
+            return new ResponseEntity<>(customerSer.getAll(),HttpStatus.OK);
         }
 }
