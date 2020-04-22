@@ -1,6 +1,6 @@
 # linxone-java
 
-LinxOne-Java will be brought to you using the following technology stack:
+LinxOne-Java is brought to you using the following technology stack:
 
 1. Spring boot, 
 2. Spring data jpa, 
