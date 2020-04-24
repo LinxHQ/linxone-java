@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Title</title>
@@ -95,29 +95,21 @@
     </div>
     <hr>
     <br />
-
+    <a href="/user/customer/new" style="color: darkgreen"><i class="fa fa-plus" aria-hidden="true"></i>New Customer</a>
+    <br/>
     <div class="row">
-        <table class="table">
+        <table class="table table-striped">
             <thead class="thead-light">
             <tr>
-                <th style="color: green;">Name</th>
-                <th style="color: green;">Registration</th>
-                <th style="color: green;">Website</th>
-                <th style="color: green;">Customer Type</th>
-                <th style="color: green;">Action</th>
+                <th></th>
+                <th style="color: green; text-align: center">Name</th>
+                <th style="color: green; text-align: center">Registration</th>
+                <th style="color: green; text-align: center">Customer Type</th>
+                <th style="color: green; text-align: center">Action</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <th>1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                    <i class="fa fa-trash" aria-hidden="true" style="padding-left: 15px;"></i>
-                </td>
-            </tr>
+            <tbody id="tblCustomer">
+
             </tbody>
         </table>
     </div>
@@ -137,7 +129,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- Optional JavaScript -->
 
-<script type="text/javascript">
+<script type="text/javascript" src="/customer.js">
 
 </script>
 </body>

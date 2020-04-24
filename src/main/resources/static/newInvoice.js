@@ -4,6 +4,7 @@ var listItem = new Array();
 var subTotal;
 var invoiceCustomer = new Object();
 var invoiceDate;
+var invoiceDue;
 var invoice = new Object();
 var totalDiscount;
 var totalTax;
@@ -317,10 +318,34 @@ function btnSaveCustomerClick(){
 
 function btnSaveDateClick(){
     var date = document.getElementById("inputDate").value;
-    if(date === ""){
+    if(date == ""){
         date = "Enter date";
     }
     invoiceDate = date;
+    $("#date").html(date);
+}
+
+function btnSaveTermClick(){
+    var selectTerm = document.getElementById("selectTerm").value;
+    switch (selectTerm)
+    {
+        case 0 : {
+            invoiceDue = invoiceDate;
+            break;
+        }
+        case 1 : {
+            invoiceDue
+            break;
+        }
+        case 2 : {
+
+            break;
+        }
+        default : {
+
+        }
+    }
+    invoiceDue = term;
     $("#date").html(date);
 }
 

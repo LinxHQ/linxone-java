@@ -15,11 +15,16 @@ import com.linxone.service.InvoiceService;
 public class BaseController {
 	@Autowired InvoiceService invoiceSer;
 	
-	@RequestMapping(value ="/")
+	@RequestMapping(value = {"/","/user/invoice/"})
 	public String home(Model model) {
 		List<Invoice> invoices = invoiceSer.getAll();
 		model.addAttribute("invoices", invoices);
 		return "home";
+	}
+
+	@RequestMapping(value = "/user/report")
+	public String report() {
+		return "report";
 	}
 	
 //	@RequestMapping("/login")

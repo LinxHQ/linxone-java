@@ -25,6 +25,11 @@ public class InvoiceApi {
 		return new ResponseEntity<>(invoiceSer.getByCustomerId(id), HttpStatus.OK);
 	}
 
+	@GetMapping(value = "/getByIdCustomerAndDue/{id}/{due}")
+	public ResponseEntity<List<Invoice>> getByIdCustomerAndDue(@PathVariable(name = "id") int id, @PathVariable(name = "due") int due){
+		return new ResponseEntity<>(invoiceSer.getByCustomerIdAndDue(id, due), HttpStatus.OK);
+	}
+
 	@PostMapping(value = "/create")
 	public ResponseEntity<Invoice> create(@RequestBody Invoice invoice){
 		Invoice newInvoice = invoiceSer.add(invoice);

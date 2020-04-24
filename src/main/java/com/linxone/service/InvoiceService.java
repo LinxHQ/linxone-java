@@ -1,5 +1,6 @@
 package com.linxone.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,21 @@ public class InvoiceService {
 
 	public List<Invoice> getByCustomerId(int id){
 		return invoiceRepo.findByCustomerId(id);
+	}
+
+	public List<Invoice> getByCustomerIdAndDue(int idCustomer, int due){
+		switch (due) {
+			case 0:
+				return invoiceRepo.findByCustomerIdAndDueDate(idCustomer, 0, 30);
+			case 1:
+				return invoiceRepo.findByCustomerIdAndDueDate(idCustomer, 31, 60);
+			case 2:
+				return invoiceRepo.findByCustomerIdAndDueDate(idCustomer, 61, 90);
+			case 3:
+				return invoiceRepo.findByCustomerIdAndDueDate(idCustomer, 90);
+			default:
+				return invoiceRepo.findByCustomerIdAndDueDate(idCustomer, 0);
+		}
 	}
 	
 	public Invoice add(Invoice invoice) {
