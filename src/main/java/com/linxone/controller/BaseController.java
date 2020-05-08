@@ -26,6 +26,11 @@ public class BaseController {
 	public String report() {
 		return "report";
 	}
+
+	@RequestMapping(value = "/user/payment")
+	public String payment() {
+		return "newPayment";
+	}
 	
 //	@RequestMapping("/login")
 //	public String login() {

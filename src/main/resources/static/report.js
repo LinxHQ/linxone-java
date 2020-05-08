@@ -1,3 +1,5 @@
+
+
 var listCustomer;
 function agingBtnSearchClick(){
     $("#tblAging").empty();

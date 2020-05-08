@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Invoices <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/user/invoice/">Invoices <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Expenses</a>
@@ -31,12 +31,15 @@
                     <a class="nav-link" href="#">Quotations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Customers</a>
+                    <a class="nav-link" href="/user/report">Report</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Payments</a>
+                    <a class="nav-link" href="/user/customer/">Customers</a>
                 </li>
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">...</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/payment">Payments</a>
+                </li>
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">...</a>
                 </li>
             </ul>
             <div class="form-inline my-2 my-lg-0 pr-5">
@@ -142,7 +145,7 @@
                     <th th:utext="${invoice.customer.name}"></th>
                     <td th:utext="${invoice.totalPaid}" style="color: green"></td>
                     <td th:utext="${invoice.totalOutstanding}" style="color: #ffc107"></td>
-                    <td><a th:href="@{/user/invoice/new}">View detail</a></td>
+                    <td><a th:href="@{'/user/invoice/'+${invoice.id}}">View detail</a></td>
                 </tr>
             </tbody>
         </table>

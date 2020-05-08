@@ -89,7 +89,7 @@ function showCustomer(customerId, startDate, endDate){
                                     '<div class="row" style="font-family: Arial;">'
                                     +'<div style="font-weight: bold; float: left;" id="invoiceNo">Invoice-'+invoice.id+'</div>'
                                     +'<div style="padding-left: 30px; float: left;" id="invoiceTotal">Total:</div>'
-                                    +'<div style="padding-left: 3px;">'+invoice.totalAfterTax+'</div>'
+                                    +'<div style="padding-left: 3px;">'+invoice.totalAfterTax.toFixed(2) +'</div>'
                                     +'</div>'
                                     +'<div class="row">'
                                     +'<table class="table table-bordered table-sm">'

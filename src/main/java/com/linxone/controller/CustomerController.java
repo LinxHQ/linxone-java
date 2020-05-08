@@ -46,10 +46,12 @@ public class CustomerController {
 
     @GetMapping("/detail/{id}")
     public String detailCustomer(Model model, @PathVariable(name = "id") int id){
+        Customer customer = customerSer.getById(id);
         List<Address> addresses = addressSer.getByCustomerId(id);
         List<CustomerContact> contacts = customerContactSer.getByCustomerId(id);
         List<Invoice> invoices = invoiceSer.getByCustomerId(id);
 
+        model.addAttribute("customer", customer);
         model.addAttribute("addresses", addresses);
         model.addAttribute("contacts",contacts);
         model.addAttribute("invoices", invoices);

@@ -22,8 +22,8 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Invoices <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/invoice/">Invoices <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Expenses</a>
@@ -35,10 +35,13 @@
                     <a class="nav-link" href="#">Quotations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Customers</a>
+                    <a class="nav-link" href="/user/report">Report</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/user/customer/">Customers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Payments</a>
+                    <a class="nav-link" href="/user/payment">Payments</a>
                 </li>
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">...</a>
                 </li>
@@ -100,25 +103,26 @@
             <table class="table table-bordered table-striped">
                 <tr>
                     <th>Name</th>
-                    <td style="width: 70%;">
+                    <td style="width: 70%;" >
                         <!-- Button trigger modal -->
-                        <a data-toggle="modal" data-target="#exampleModal">
+                        <a data-toggle="modal" data-target="#nameCustomerModal" th:if="${customer.name}" th:utext="${customer.name}">
+                        </a>
+                        <a data-toggle="modal" data-target="#nameCustomerModal" th:unless="${customer.name}">
                             Click to edit
                         </a>
-
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        <div class="modal fade" id="nameCustomerModal" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <h5 class="modal-title" >Edit name</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <input type="text" name="" id="input" class="form-control" value=""
+                                        <input type="text" name="" id="inputNameCustomer" class="form-control" value=""
                                                required="required" pattern="" title="">
                                     </div>
                                     <div class="modal-footer">
@@ -136,17 +140,19 @@
                     <th>Registration</th>
                     <td style="width: 70%;">
                         <!-- Button trigger modal -->
-                        <a data-toggle="modal" data-target="#exampleModal">
+                        <a data-toggle="modal" data-target="#registrationCustomerModal" th:if="${customer.registration}" th:utext="${customer.registration}">
+                        </a>
+                        <a data-toggle="modal" data-target="#registrationCustomerModal" th:unless="${customer.registration}">
                             Click to edit
                         </a>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        <div class="modal fade" id="registrationCustomerModal" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <h5 class="modal-title">Edit Registraion</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -166,55 +172,59 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <th>Tax code</th>
-                    <td style="width: 70%;">
-                        <!-- Button trigger modal -->
-                        <a data-toggle="modal" data-target="#exampleModal">
-                            Click to edit
-                        </a>
+<!--                <tr>-->
+<!--                    <th>Tax code</th>-->
+<!--                    <td style="width: 70%;">-->
+<!--                        &lt;!&ndash; Button trigger modal &ndash;&gt;-->
+<!--                        <a data-toggle="modal" data-target="#taxCustomerModal" th:if="${customer.tax}" th:utext="${customer.tax}">-->
+<!--                        </a>-->
+<!--                        <a data-toggle="modal" data-target="#taxCustomerModal" th:unless="${customer.tax}">-->
+<!--                            Click to edit-->
+<!--                        </a>-->
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <input type="text" name="" id="input" class="form-control" value=""
-                                               required="required" pattern="" title="">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Save
-                                            changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+<!--                        &lt;!&ndash; Modal &ndash;&gt;-->
+<!--                        <div class="modal fade" id="taxCustomerModal" tabindex="-1" role="dialog"-->
+<!--                             aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--                            <div class="modal-dialog" role="document">-->
+<!--                                <div class="modal-content">-->
+<!--                                    <div class="modal-header">-->
+<!--                                        <h5 class="modal-title">Edit tax code</h5>-->
+<!--                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                                            <span aria-hidden="true">&times;</span>-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                    <div class="modal-body">-->
+<!--                                        <input type="text" name="" id="input" class="form-control" value=""-->
+<!--                                               required="required" pattern="" title="">-->
+<!--                                    </div>-->
+<!--                                    <div class="modal-footer">-->
+<!--                                        <button type="button" class="btn btn-secondary"-->
+<!--                                                data-dismiss="modal">Close</button>-->
+<!--                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Save-->
+<!--                                            changes</button>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </td>-->
+<!--                </tr>-->
                 <tr>
                     <th>Customer Type</th>
                     <td style="width: 70%;">
                         <!-- Button trigger modal -->
-                        <a data-toggle="modal" data-target="#exampleModal">
+                        <a data-toggle="modal" data-target="#typeCustomerModal" th:if="${customer.type}" th:utext="${customer.type}">
+                        </a>
+                        <a data-toggle="modal" data-target="#typeCustomerModal" th:unless="${customer.type}">
                             Click to edit
                         </a>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        <div class="modal fade" id="typeCustomerModal" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit type</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -264,8 +274,52 @@
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
-
+            <div class="tab-pane fade show active" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab" th:each="address, state : ${addresses}">
+                <div class="card">
+                    <div div class="card-header" style="background-color:  rgb(16, 160, 16)">
+                        <a style="color: aliceblue; font-size: medium; font-weight: bold;" data-toggle="collapse"
+                           th:href="@{'#collapseAddress'+${state}}" role="button" aria-expanded="false" aria-controls="collapseBasicInfor">
+                            <i class="fa fa-info" aria-hidden="true"></i>
+                            Basic Information
+                        </a>
+                    </div>
+                    <div class="collapse" id="collapseAddress+">
+                        <div class="card card-body">
+                            <div class="form-group row">
+                                <label for="colFormLabel" class="col-sm-2 col-form-label" style="text-align: right;">Name*</label>
+                                <div class="col-sm-6">
+                                    <input type="email" class="form-control" id="colFormLabel">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabel" class="col-sm-2 col-form-label" style="text-align: right;">Website</label>
+                                <div class="col-sm-6">
+                                    <input type="email" class="form-control" id="colFormLabel">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabel" class="col-sm-2 col-form-label" style="text-align: right;">Registration</label>
+                                <div class="col-sm-3">
+                                    <input type="email" class="form-control" id="colFormLabel">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabel" class="col-sm-2 col-form-label" style="text-align: right;">Customer Type</label>
+                                <div class="col-sm-3">
+                                    <select name="" id="input" class="form-control" required="required">
+                                        <option value="Customer">Customer</option>
+                                        <option value="Vendor">Vendor</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3 offset-sm-2">
+                                    <input type="checkbox" value=""> Own Company
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
 

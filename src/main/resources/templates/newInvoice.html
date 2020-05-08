@@ -31,7 +31,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Invoices <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/user/invoice/">Invoices <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Expenses</a>
@@ -43,12 +43,15 @@
                         <a class="nav-link" href="#">Quotations</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Customers</a>
+                        <a class="nav-link" href="/user/report">Report</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Payments</a>
+                        <a class="nav-link" href="/user/customer/">Customers</a>
                     </li>
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">...</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/payment">Payments</a>
+                    </li>
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">...</a>
                     </li>
                 </ul>
                 <div class="form-inline my-2 my-lg-0 pr-5">
@@ -144,6 +147,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary" onclick="btnSaveCustomerClick()" data-dismiss="modal">Save</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>
@@ -164,19 +168,20 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                             </div>
-                                    <div class="modal-body">
-                                        <div class="container-fluid">
-                                            <div class="row">
-                                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                                                    <select id="addressSelect"  class="form-control" required="required">
-                                                        <option>--</option>
-                                                    </select>
+                                        <div class="modal-body">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                                        <select id="selectAddress"  class="form-control" required="required" >
+
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="btnSaveAddressClick()">Save</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>
@@ -184,7 +189,7 @@
                         <br>
 
                             <!-- Button trigger modal -->
-                        <a data-toggle="modal" data-target="#contactModal" class="text-muted">
+                        <a data-toggle="modal" data-target="#contactModal" class="text-muted" id="customerContact">
                             Choose contact
                             </a>
                             <!-- Modal -->
@@ -192,7 +197,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Select  Attention</h5>
+                                            <h5 class="modal-title">Select  Contact</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -201,15 +206,15 @@
                                             <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                                                        <select name="" id="input" class="form-control" required="required">
-                                                            <option value=""></option>
+                                                        <select name="" id="selectContact" class="form-control" required="required">
+
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary">Save</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="btnSaveContactClick()">Save</button>
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
@@ -218,7 +223,7 @@
                             <br>
 
                             <!-- Button trigger modal -->
-                        <a data-toggle="modal" data-target="#subjectModal" class="text-muted">
+                        <a data-toggle="modal" data-target="#subjectModal" class="text-muted" id="contentSubject">
                             Enter invoice subject
                             </a>
                             <!-- Modal -->
@@ -233,11 +238,11 @@
                                                 </div>
                                         <div class="modal-body">
                                             <div class="container-fluid">
-                                                <input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="">
+                                                <input type="text" name="" id="inputSubject" class="form-control" value="" required="required" pattern="" title="">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary">Save</button>
+                                            <button type="button" class="btn btn-primary" onclick="btnSaveSubject()" data-dismiss="modal">Save</button>
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
@@ -276,13 +281,13 @@
                             </tr>
                             <tr>
                                 <th>Term</th>
-                                <td style="text-right"><a data-toggle="modal" data-target="#termModal" class="text-muted" id="term">Enter Term</a></td>
+                                <td style="text-right"><a data-toggle="modal" data-target="#termModal" class="text-muted" id="contentTerm">Enter Term</a></td>
                                 <!-- Modal -->
                                 <div class="modal fade" id="termModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Enter Term</h5>
+                                                <h5 class="modal-title" >Enter Term</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -469,11 +474,11 @@
                 <td><input type="date" name="" id="inputPaymentDate1" class="form-control" value="" required="required" title=""></td>
                 <td>
                     <select class="form-control" name="" id="selectPaymentMethod1">
-                        <option value="1">Master Card</option>
-                        <option value="2">Visa Card</option>
-                        <option value="3">Cash</option>
-                        <option value="4">Check</option>
-                        <option value="5">Other</option>
+                        <option value="Master Card">Master Card</option>
+                        <option value="Visa Card">Visa Card</option>
+                        <option value="Cash">Cash</option>
+                        <option value="Check">Check</option>
+                        <option value="Other">Other</option>
                     </select>
                 </td>
                 <td>
@@ -491,7 +496,7 @@
         <div class="card text-white bg-success mb-3">
             <div class="card-header" style="color: aliceblue; font-family: Arial, Helvetica, sans-serif; ">Note</div>
             <div class="card-body" style="background-color: aliceblue;">
-                <a data-toggle="modal" data-target="#noteModal"><h6 style="color: gray; font-family: Arial">Click to enter note</h6></a>
+                <a data-toggle="modal" data-target="#noteModal"><h6 style="color: gray; font-family: Arial" id="contentNote">Click to enter note</h6></a>
 
                 <div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -503,11 +508,11 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <textarea name="" id="input" class="form-control" rows="3" required="required" style="height: 100px;"></textarea>
+                                <textarea name="" id="inputNote" class="form-control" rows="3" required="required" style="height: 100px;"></textarea>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="btnSaveNote();">Save changes</button>
                             </div>
                         </div>
                     </div>

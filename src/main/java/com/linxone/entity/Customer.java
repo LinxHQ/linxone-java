@@ -1,7 +1,6 @@
 package com.linxone.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -19,11 +18,6 @@ public class Customer implements Serializable{
 	@Column(name = "lb_customer_name")
 	private String name;
 
-
-	@OneToOne
-	@JoinColumn(name = "lb_customer_tax_id")
-	private Tax tax;
-
 	@Column(name = "lb_customer_registration")
 	private String registration;
 
@@ -31,6 +25,10 @@ public class Customer implements Serializable{
 	private String type;
 
 	public Customer() {
+	}
+
+	public Customer(String name) {
+		this.name = name;
 	}
 
 	public int getId() {
@@ -47,14 +45,6 @@ public class Customer implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Tax getTax() {
-		return tax;
-	}
-
-	public void setTax(Tax tax) {
-		this.tax = tax;
 	}
 
 	public String getRegistration() {

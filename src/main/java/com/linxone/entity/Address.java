@@ -21,6 +21,9 @@ public class Address implements Serializable{
 	@Column(name = "lb_customer_address_city")
 	private String city;
 
+	@Column(name = "lb_customer_address_country")
+	private String country;
+
 	@Column(name = "lb_customer_address_state")
 	private String province;
 
@@ -41,6 +44,14 @@ public class Address implements Serializable{
 	private Customer customer;
 
 	public Address() {
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public int getId() {

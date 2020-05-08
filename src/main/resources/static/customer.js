@@ -30,3 +30,12 @@ window.onload = function(){
         }
     });
 };
+
+function btnPrinPDFClick() {
+    openInNewTab("/api/customer/get/printPDF");
+}
+
+function openInNewTab(url) {
+    var win = window.open(url, '_blank');
+    win.focus();
+}

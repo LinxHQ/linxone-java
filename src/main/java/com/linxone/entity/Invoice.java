@@ -27,6 +27,14 @@ public class Invoice implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "lb_invoice_customer_id")
 	private Customer customer;
+
+	@ManyToOne
+	@JoinColumn(name = "lb_invoice_customer_contact_id")
+	private CustomerContact customerContact;
+
+	@ManyToOne
+	@JoinColumn(name = "lb_invoice_customer_address_id")
+	private Address customerAddress;
 	
 	@Column(name = "lb_invoice_subject")
 	private String subject;
@@ -57,6 +65,22 @@ public class Invoice implements Serializable{
 
 	public float getSubtotal() {
 		return subtotal;
+	}
+
+	public CustomerContact getCustomerContact() {
+		return customerContact;
+	}
+
+	public void setCustomerContact(CustomerContact customerContact) {
+		this.customerContact = customerContact;
+	}
+
+	public Address getCustomerAddress() {
+		return customerAddress;
+	}
+
+	public void setCustomerAddress(Address customerAddress) {
+		this.customerAddress = customerAddress;
 	}
 
 	public void setSubtotal(float subtotal) {

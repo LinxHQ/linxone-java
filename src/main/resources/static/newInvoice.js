@@ -8,11 +8,10 @@ var invoiceDue;
 var invoice = new Object();
 var totalDiscount;
 var totalTax;
-var invoiceTotal;
-var listPayment = new Array();
 var totalPaid;
 var outstanding;
 
+//Delete payment
 function deletePaymentByNumber(number){
     var result = confirm("Are you want to delete this payment?");
     if (result) {
@@ -21,7 +20,9 @@ function deletePaymentByNumber(number){
         change();
     }
 };
+
 var paymentLength = 1;
+//Add payment
 $("#btnAddPayment").click(function(){
     paymentLength ++;
     $("#tblPayment").append('<tr id="payment'+paymentLength+'">'
@@ -46,6 +47,7 @@ $("#btnAddPayment").click(function(){
         +'</tr>');
 });
 
+//Delete discount
 function deleteDiscountByNumber(number){
     var result = confirm("Are you want to delete this discount?");
     if (result) {
@@ -55,6 +57,8 @@ function deleteDiscountByNumber(number){
     }
 }
 
+
+//Delete tax
 function deleteTaxByNumber(number){
     var result = confirm("Are you want to delete this tax?");
     if (result) {
@@ -64,22 +68,37 @@ function deleteTaxByNumber(number){
     }
 }
 
+//Create invoice
 function saveInvoice(){
-
+    console.log("Subtotal: "+subTotal);
+    console.log("after discount: "+(subTotal - totalDiscount));
+    console.log("after tax: "+(subTotal - totalDiscount + totalTax));
+    console.log("total Paid: "+totalPaid);
+    console.log("outstanding: "+outstanding);
     // Create new invoice
     invoice = {
         customer : {
             id : invoiceCustomer.id
         },
+        customerContact : {
+            id : contact.id
+        },
+        customerAddress : {
+            id : address.id
+        },
+        dueDate : invoiceDue,
         date : invoiceDate,
-        // Create invoice total
         subtotal : subTotal,
-        totalAfterDiscount : subTotal - totalDiscount,
-        totalAfterTax : subTotal - totalDiscount + totalTax,
-        totalPaid : totalPaid,
-        totalOutstanding : outstanding
+        totalAfterDiscount : (subTotal - totalDiscount),
+        totalAfterTax : (subTotal - totalDiscount + totalTax),
+        totalPaid : 0.00,
+        totalOutstanding : (subTotal - totalDiscount + totalTax),
+        note : note,
+        subject : subject
     }
+    console.log("Object: "+invoice);
     var invoiceJson = JSON.stringify(invoice);
+    console.log("Json: "+invoiceJson);
     $.ajax({
         type: 'POST',
         url: '/api/invoice/create',
@@ -91,6 +110,7 @@ function saveInvoice(){
         dataType: 'json',
         success: function(newInvoice) {
             var idNewInvoice = newInvoice.id;
+
             // Create new list item
             for(var i = 1; i <= index; i++){
                 var idItem = "item"+i;
@@ -131,13 +151,49 @@ function saveInvoice(){
                 data : listItemJson,
                 dataType: 'json',
                 success: function(newListItem) {
-                    alert("Success");
+                    //Create payment
+                    var listPayment = new Array();
+                    for (var i = 1; i <= paymentLength; i++) {
+                        var idPayment = "payment" + i;
+                        if (document.getElementById(idPayment) != null) {
+                            var idDate = "#inputPaymentDate"+i;
+                            var idMethod = "#selectPaymentMethod"+i;
+                            var idAmount = "#inputPaymentAmount" +i;
+                            var idNote = "#inputPaymentNote"+i;
+                            var payment = {
+                                date: $(idDate).val(),
+                                method: $(idMethod).val(),
+                                note: $(idNote).val(),
+                                amount: $(idAmount).val(),
+                                invoice: newInvoice
+                            };
+                            listPayment.push(payment);
+                        }
+                    }
+                    var listPaymentJson = JSON.stringify(listPayment);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/payment/create/list',
+                        header : {
+                            "Content-Type" : "application/json"
+                        },
+                        contentType : 'application/json',
+                        data : listPaymentJson,
+                        dataType: 'json',
+                        success: function(newListPayment) {
+                            alert("Success");
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            // Fail
+                            alert("Fail");
+                        }
+                    });
+
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     // Fail
                     alert("Fail");
                 }
-
             });
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -147,6 +203,8 @@ function saveInvoice(){
     });
 }
 
+
+//Handling change
 function change() {
 
     // Change Item
@@ -216,8 +274,11 @@ function change() {
     //Change Outstanding
     outstanding = (total-totalPayment).toFixed(2);
     document.getElementById("inputOutstanding").setAttribute("value", outstanding);
+
+
 }
 
+//Delete item
 function deleteItemByNumber(number){
     var result = confirm("Are you want to delete this item?");
     if (result) {
@@ -227,6 +288,8 @@ function deleteItemByNumber(number){
     }
 };
 
+
+//Load product
 function insertProductById(idProduct, itemNumber){
     console.log(idProduct);
     var product;
@@ -278,6 +341,10 @@ window.onload = function(){
     });
 };
 
+var listAddress;
+var listContact;
+
+//Save customer
 function btnSaveCustomerClick(){
     var idCustomer = document.getElementById("customerIdSelect").value;
     $.ajax({
@@ -292,6 +359,8 @@ function btnSaveCustomerClick(){
             invoiceCustomer = customer;
             $("#customerName").html(customer.name);
 
+            //Get address
+            $("#selectAddress").empty();
             $.ajax({
                 type: 'get',
                 url: '/api/address/getByIDCustomer/'+idCustomer,
@@ -301,9 +370,33 @@ function btnSaveCustomerClick(){
                 contentType : 'application/json',
                 dataType: 'json',
                 success: function(addresses) {
-                    var address = addresses[0];
-                    var htmlAddress = "ADDRESS: City: " + address.city + " Phone: " + address.phone1 + " Website: " + address.websiteUrl;
-                    $("#customerAddress").html(htmlAddress);
+                    listAddress = addresses;
+                    for(var i = 0; i < listAddress.length; i++){
+                        var addressStr = "City: " + listAddress[i].city + " Phone: " + listAddress[i].phone1 + " Website: " + listAddress[i].websiteUrl;
+                        $("#selectAddress").append('<option value="'+i+'">'+addressStr+'</option>');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Fail
+                }
+            });
+
+            //Get contact
+            $("#selectContact").empty();
+            $.ajax({
+                type: 'get',
+                url: '/api/customerContact/getByIDCustomer/'+idCustomer,
+                header : {
+                    "Content-Type" : "application/json"
+                },
+                contentType : 'application/json',
+                dataType: 'json',
+                success: function(contacts) {
+                    listContact = contacts;
+                    for(var i = 0; i < listContact.length; i++){
+                        var contactStr = "Name: " + listContact[i].firstName +" "+ listContact[i].lastName + " Email: " + listContact[i].email1 + " Phone: " + listContact[i].officePhone;
+                        $("#selectContact").append('<option value="'+i+'">'+contactStr+'</option>');
+                    }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     // Fail
@@ -316,37 +409,83 @@ function btnSaveCustomerClick(){
     });
 }
 
+var address;
+
+//Save address
+function btnSaveAddressClick(){
+    var index = document.getElementById("selectAddress").value;
+    console.log(index);
+    address = listAddress[index];
+    console.log(address);
+    var addressStr = "City: " + address.city + "Country: "+ address.country+ " Postal Code: " + address.postalCode + " Website: " + address.websiteUrl;
+    $("#customerAddress").empty();
+    $("#customerAddress").append(addressStr) ;
+}
+
+var contact;
+
+//Save contact
+function btnSaveContactClick(){
+    var index = document.getElementById("selectContact").value;
+    contact = listContact[index];
+    var contactStr = "Name: " + contact.firstName +" "+ contact.lastName + " Email: " + contact.email1 + " Phone: " + contact.officePhone;
+    $("#customerContact").empty();
+    $("#customerContact").append(contactStr) ;
+}
+
+//Save Date
 function btnSaveDateClick(){
     var date = document.getElementById("inputDate").value;
     if(date == ""){
         date = "Enter date";
     }
-    invoiceDate = date;
+    invoiceDate = new Date(date);
     $("#date").html(date);
 }
 
+//Save Term
 function btnSaveTermClick(){
     var selectTerm = document.getElementById("selectTerm").value;
     switch (selectTerm)
     {
-        case 0 : {
-            invoiceDue = invoiceDate;
+        case "0" : {
+            invoiceDue = new Date(invoiceDate.getTime()+86400000*2);
+            $("#contentTerm").empty();
+            $("#contentTerm").append("2 days");
             break;
         }
-        case 1 : {
-            invoiceDue
+        case "1" : {
+            invoiceDue = new Date(invoiceDate.getTime()+86400000*5);
+            $("#contentTerm").empty();
+            $("#contentTerm").append("5 days");
             break;
         }
-        case 2 : {
-
+        case "2" : {
+            invoiceDue = new Date(invoiceDate.getTime()+86400000*7);
+            $("#contentTerm").empty();
+            $("#contentTerm").append("7 days");
             break;
         }
         default : {
-
+            invoiceDue = new Date(invoiceDate.getTime());
+            $("#contentTerm").empty();
+            $("#contentTerm").append("Immediate");
         }
     }
-    invoiceDue = term;
-    $("#date").html(date);
+}
+
+var note;
+function btnSaveNote(){
+    note = $("#inputNote").val();
+    $("#contentNote").empty();
+    $("#contentNote").append(note);
+}
+
+var subject;
+function btnSaveSubject(){
+    subject = $("#inputSubject").val();
+    $("#contentSubject").empty();
+    $("#contentSubject").append(subject);
 }
 
 $('#customerModal').on('show.bs.modal', event => {
