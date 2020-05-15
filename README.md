@@ -19,4 +19,4 @@ Contact us at: joseph.pnc@linxhq.com or contact@linxhq.com.
 1. Download the code
 2. Create a Mysql database for your installation
 3. Open file application.properties with path "src/main/resources/application.properties" to configure url, username, password
-4. Deploy on your web server(tomcat) except folder Reactjs
+4. Deploy on your web server(tomcat) with file linxone.war("target/linxone.war")
