@@ -1,13 +1,13 @@
-package com.linxone;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class LinxoneApplicationTests {
-
-    @Test
-    void contextLoads() {
-    }
-
-}
+//package com.linxone;
+//
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//@SpringBootTest
+//class LinxoneApplicationTests {
+//
+//    @Test
+//    void contextLoads() {
+//    }
+//
+//}

@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+<!--    Navbar-->
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="height: 2.5em;">
+        <a class="navbar-brand pl-5" href="#">
+            <i class="fa fa-home" aria-hidden="true"></i>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/invoice/">Invoices <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Expenses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contracts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Quotations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/user/report">Report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/customer/">Customers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/payment">Payments</a>
+                </li>
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">...</a>
+                </li>
+            </ul>
+            <div class="form-inline my-2 my-lg-0 pr-5">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-suitcase" aria-hidden="true"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="..." alt="..." class="rounded-circle">
+                    </a> -->
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+<div class="container">
+    <!--        Search-->
+    <div class="row pt-3 pb-0">
+        <div class="col-md-7">
+            <legend class="font-weight-bold" style="color: green;">Report</legend>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" style="border-radius: 30px;" class="form-control" name="" id=""
+                       aria-describedby="helpId" placeholder="Search">
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>
+
+<div class="container-fluid">
+    <div class="row pl-5">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-aging" data-toggle="tab" href="#nav-aging"
+                   role="tab" aria-controls="nav-aging" aria-selected="true"
+                   style="color: rgb(0, 51, 0); font-weight: bold;">
+                    Aging Report
+                </a>
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+                   aria-controls="nav-contact" aria-selected="false"
+                   style="color: rgb(0, 51, 0); font-weight: bold;">
+                    Cash Receipt
+                </a>
+                <a class="nav-item nav-link" id="nav-invoice-tab" data-toggle="tab" href="#nav-invoice" role="tab"
+                   aria-controls="nav-contact" aria-selected="false"
+                   style="color: rgb(0, 51, 0); font-weight: bold;">
+                    Invoices Journal
+                </a>
+                <a class="nav-item nav-link" id="nav-quotation-tab" data-toggle="tab" href="#nav-quotation"
+                   role="tab" aria-controls="nav-contact" aria-selected="false"
+                   style="color: rgb(0, 51, 0); font-weight: bold;">
+                    GST Report
+                </a>
+                <a class="nav-item nav-link" id="nav-quotation-tab" data-toggle="tab" href="#nav-quotation"
+                   role="tab" aria-controls="nav-contact" aria-selected="false"
+                   style="color: rgb(0, 51, 0); font-weight: bold;">
+                    Sales Report
+                </a>
+                <a class="nav-item nav-link" id="nav-quotation-tab" data-toggle="tab" href="#nav-quotation"
+                   role="tab" aria-controls="nav-contact" aria-selected="false"
+                   style="color: rgb(0, 51, 0); font-weight: bold;">
+                    Customer Statements
+                </a>
+                <a class="nav-item nav-link" id="nav-quotation-tab" data-toggle="tab" href="#nav-quotation"
+                   role="tab" aria-controls="nav-contact" aria-selected="false"
+                   style="color: rgb(0, 51, 0); font-weight: bold;">
+                    Payment Report
+                </a>
+                <a class="nav-item nav-link" id="nav-quotation-tab" data-toggle="tab" href="#nav-quotation"
+                   role="tab" aria-controls="nav-contact" aria-selected="false"
+                   style="color: rgb(0, 51, 0); font-weight: bold;">
+                    Employee Report
+                </a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-aging" role="tabpanel" aria-labelledby="nav-aging-tab">
+                <div class="row justify-content-center">
+                    <table class="table table-borderless ">
+                        <thead>
+                            <tr>
+                                <td colspan="5"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Customer: </th>
+                                <td>
+                                    <select name="" id="agingSelectCustomer" class="form-control" required="required">
+                                        <option value="-1">--</option>
+                                    </select>
+                                </td>
+                                <th>Time ranger: </th>
+                                <td>
+                                    <select name="" id="agingSelectTime" class="form-control" required="required">
+                                        <option value="-1">--</option>
+                                        <option value="0">0-30 days</option>
+                                        <option value="1">31-60 days</option>
+                                        <option value="2">61-90 days</option>
+                                        <option value="3">90+ days</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary" onclick="agingBtnSearchClick();">Search</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="btn btn-success" id="btnPrintExcel">Print Excel</button>
+                <br/>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-sm" style="width: 195%;" id="tblAgingReport">
+                            <thead style="background-color: rgb(36, 161, 36);">
+                            <tr>
+                                <th  style="color: rgb(255, 255, 255); text-align: center;">Number</th>
+                                <th  style="color: rgb(255, 255, 255); text-align: center;">Date</th>
+                                <th  style="color: rgb(255, 255, 255); text-align: center;">0 - 30 Days</th>
+                                <th  style="color: rgb(255, 255, 255); text-align: center;">31 - 60 Days</th>
+                                <th  style="color: rgb(255, 255, 255); text-align: center;">61 - 90 Days</th>
+                                <th  style="color: rgb(255, 255, 255); text-align: center;">90 + Days</th>
+                                <th  style="color: rgb(255, 255, 255); text-align: center;">Balance</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tblAging">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+            </div>
+            <div class="tab-pane fade" id="nav-invoice" role="tabpanel" aria-labelledby="nav-invoice-tab">
+
+            </div>
+            <div class="tab-pane fade" id="nav-quotation" role="tabpanel" aria-labelledby="nav-quotation-tab">
+
+            </div>
+            <div class="tab-pane fade" id="nav-invoice" role="tabpanel" aria-labelledby="nav-invoice-tab">
+
+            </div>
+            <div class="tab-pane fade" id="nav-quotation" role="tabpanel" aria-labelledby="nav-quotation-tab">
+
+            </div>
+            <div class="tab-pane fade" id="nav-invoice" role="tabpanel" aria-labelledby="nav-invoice-tab">
+
+            </div>
+            <div class="tab-pane fade" id="nav-quotation" role="tabpanel" aria-labelledby="nav-quotation-tab">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<!-- ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Optional JavaScript -->
+<script type="text/javascript" src="/table_to_excel.js"></script>
+<script type="text/javascript" src="/report.js">
+</script>
+<script type="text/javascript">
+    $("#btnPrintExcel").click(function(){
+        $("#tblAgingReport").table2excel({
+            exclude:".noExl",
+            name:"Worksheet Name",
+            filename:"AgingReport",
+            fileext:".xls"
+        });
+    });
+</script>
+</body>
+
+</html>
