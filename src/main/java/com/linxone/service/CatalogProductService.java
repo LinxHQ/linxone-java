@@ -31,4 +31,9 @@ public class CatalogProductService {
 	public void delete(CatalogProduct catalogProduct) {
 		catalogProductRepo.delete(catalogProduct);
 	}
+
+	public void delete(int id) {
+		catalogProductRepo.deleteById(id);
+	}
+
 }

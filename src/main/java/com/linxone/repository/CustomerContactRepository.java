@@ -11,4 +11,5 @@ import java.util.List;
 public interface CustomerContactRepository extends JpaRepository<CustomerContact, Integer> {
     CustomerContact findById(int id);
     List<CustomerContact> findByCustomerId(int id);
+    void deleteById(int id);
 }

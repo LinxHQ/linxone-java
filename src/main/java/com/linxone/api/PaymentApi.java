@@ -26,11 +26,7 @@ public class PaymentApi {
     @GetMapping({"/get","/"})
     public ResponseEntity<List<Payment>> get(){
         ArrayList<Payment> payments = new ArrayList<>(paymentSer.getAll());
-        ArrayList<Payment> newPayments = new ArrayList<>();
-        for(Payment payment : payments){
-            newPayments.add(payment);
-        }
-        return new ResponseEntity<>(newPayments, HttpStatus.OK);
+        return new ResponseEntity<>(payments, HttpStatus.OK);
     }
 
     @GetMapping({"/get/{id}"})

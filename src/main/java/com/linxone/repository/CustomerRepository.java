@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer>{
 	Customer findById(int id);
-
+	void deleteById(int id);
 }

@@ -19,4 +19,6 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Integer>{
 
 	@Query("select i from Invoice i where i.customer.id = ?1 and DATEDIFF(CURDATE(), i.dueDate ) >= ?2 ")
 	List<Invoice> findByCustomerIdAndDueDate(int idCustomer, int time);
+
+	void deleteById(int id);
 }

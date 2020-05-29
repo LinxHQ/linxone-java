@@ -40,4 +40,7 @@ public class CustomerService {
 		customerRepo.delete(customer);
 	}
 
+	public void deleteById(int id){
+		customerRepo.deleteById(id);
+	}
 }

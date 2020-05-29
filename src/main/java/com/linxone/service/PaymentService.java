@@ -49,6 +49,10 @@ public class PaymentService {
         paymentRepo.delete(payment);
     }
 
+    public void delete(int id){
+        paymentRepo.deleteById(id);
+    }
+
     public List<Payment> getByInvoiceId(int id){
         return paymentRepo.findByInvoiceId(id);
     }

@@ -8,4 +8,5 @@ import com.linxone.entity.CatalogProduct;
 @Repository
 public interface CatalogProductRepository extends JpaRepository<CatalogProduct, Integer>{
 	CatalogProduct findById(int id);
+	void deleteById(int id);
 }

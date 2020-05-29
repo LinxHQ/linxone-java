@@ -16,7 +16,7 @@ public class SwaggerConfig {
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.linxone.api"))
+                .apis(RequestHandlerSelectors.basePackage("com.linxone.webservice"))
                 .paths(PathSelectors.any())
                 .build();
     }

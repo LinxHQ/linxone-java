@@ -15,4 +15,6 @@ public interface PaymentRepository extends JpaRepository<Payment, Integer> {
 
     List<Payment> findByInvoice_Customer_IdAndDateAfterAndDateBefore(int idCustomer, Date startDate, Date endDate);
     List<Payment> findByInvoice_IdAndDateAfterAndDateBefore(int idCustomer, Date startDate, Date endDate);
+
+    void deleteById(int id);
 }

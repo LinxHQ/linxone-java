@@ -33,6 +33,10 @@ public class CustomerContactService {
         customerContactRepo.delete(customerContact);
     }
 
+    public void delete(int id) {
+        customerContactRepo.deleteById(id);
+    }
+
     public List<CustomerContact> getByCustomerId(int id){
         return customerContactRepo.findByCustomerId(id);
     }

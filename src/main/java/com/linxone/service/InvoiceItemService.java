@@ -2,6 +2,7 @@ package com.linxone.service;
 
 import java.util.List;
 
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,11 @@ public class InvoiceItemService {
 	public InvoiceItem getById(int id) {
 		return invoiceItemRepo.findById(id);
 	}
-	
+
+	public List<InvoiceItem> getByIdInvoice(int id){
+		return invoiceItemRepo.findByInvoice_Id(id);
+	}
+
 	public InvoiceItem add(InvoiceItem invoiceItem) {
 		return invoiceItemRepo.save(invoiceItem);
 	}
@@ -30,5 +35,8 @@ public class InvoiceItemService {
 	
 	public void delete(InvoiceItem invoiceItem) {
 		invoiceItemRepo.delete(invoiceItem);
-	}	
+	}
+	public void delete(int id) {
+		invoiceItemRepo.deleteById(id);
+	}
 }
