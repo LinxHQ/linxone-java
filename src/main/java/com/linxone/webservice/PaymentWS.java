@@ -43,7 +43,7 @@ public class PaymentWS {
         }
     }
 
-    @GetMapping({"/id-customer/{idCustomer}/start-date/{startDate}/end-date/{endDate}"})
+    @GetMapping({"/id-customer/{idCustomer}/startdate/{startDate}/enddate/{endDate}"})
     public ResponseEntity<List<Payment>> getByIdCustomerAndStartdateAndEnddate(@PathVariable(name = "idCustomer") int idCustomer,
                                              @PathVariable(name = "startDate") Date startDate,
                                              @PathVariable(name = "endDate") Date endDate){

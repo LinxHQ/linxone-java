@@ -8,4 +8,5 @@ import com.linxone.entity.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer>{
 	Account findByUsername(String username);
+	Account findById(int id);
 }

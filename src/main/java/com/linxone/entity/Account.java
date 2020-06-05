@@ -3,15 +3,7 @@ package com.linxone.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.linxone.entity.Role;
 
@@ -28,7 +20,7 @@ public class Account implements Serializable{
 	@Column(name = "password")
 	private String password;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "account_role",
             joinColumns = @JoinColumn(name = "account_id"),
