@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <!--    Navbar-->
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="height: 2.5em;">
+            <a class="navbar-brand pl-5" href="#">
+                <i class="fa fa-home" aria-hidden="true"></i>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/user/invoice/">Invoices <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/user/expenses">Expenses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contracts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Quotations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/report">Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/customer/">Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/payment">Payments</a>
+                    </li>
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">...</a>
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0 pr-5">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-suitcase" aria-hidden="true"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="..." alt="..." class="rounded-circle">
+                    </a> -->
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="container">
+        <!--        Search-->
+        <div class="row pt-3 pb-0">
+            <div class="col-md-2">
+                <legend class="font-weight-bold" style="color: green;">Expenses</legend>
+            </div>
+            <div class="col-md-3 offset-md-7">
+                <a href="/user/expenses" type="button" class="btn btn-secondary btn-sm">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    Back
+                </a>
+                <a href="/user/expenses/create" type="button" class="btn btn-secondary btn-sm">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    New
+                </a>
+            </div>
+        </div>
+        <hr/>
+        <br/>
+        <legend th:utext="${expenses.no}"></legend>
+        <input type="hidden" id="inputId" th:value="${expenses.id}"/>
+        <table class="table table-sm table-striped table-bordered">
+              <tr>
+                <th style="text-align: left; width: 50%;">Expenses No</th>
+                <th style="text-align: left; width: 50%;" th:utext="${expenses.no}"></th>
+              </tr>
+              <tr>
+                <th style="text-align: left;">Category</th>
+                <td style="text-align: left; width: 50%;">
+                    <a data-toggle="modal" data-target="#categoryModal" th:utext="${expenses.categoryExpenses}">
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <select name="" id="selectCategory" class="form-control" required="required">
+                                        <option value="0">Office Stationaries</option>
+                                        <option value="1">Bussiness traveling</option>
+                                        <option value="2">Convayance</option>
+                                        <option value="3">Hanif Munshi - Salary</option>
+                                        <option value="4">Office Rent</option>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveCategory()">Save
+                                        changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <th style="text-align: left;">Date</th>
+                <td style="text-align: left; width: 50%;">
+                    <!-- Button trigger modal -->
+                    <a data-toggle="modal" data-target="#dateModal" th:if="${expenses.date}" th:utext="${expenses.date}">
+                    </a>
+                    <a data-toggle="modal" data-target="#dateModal" th:unless="${expenses.date}">
+                        Click to edit
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="dateModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="date" name="" id="inputDate" class="form-control" th:value="${expenses.date}"
+                                           required="required" pattern="" title="">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveDate()">Save
+                                        changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <th style="text-align: left;">Amount (incl. Tax)</th>
+                <td style="text-align: left; width: 50%;">
+                    <!-- Button trigger modal -->
+                    <a data-toggle="modal" data-target="#amountModal" th:if="${expenses.amount}" th:utext="${expenses.amount}">
+                    </a>
+                    <a data-toggle="modal" data-target="#amountModal" th:unless="${expenses.amount}">
+                        Click to edit
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="amountModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="number" name="" id="inputAmount" class="form-control" th:value="${expenses.amount}"
+                                           required="required" pattern="" title="">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveAmount()">Save
+                                        changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <th style="text-align: left;">Note</th>
+                <td style="text-align: left; width: 50%;">
+                    <!-- Button trigger modal -->
+                    <a data-toggle="modal" data-target="#noteModal" th:if="${expenses.note}" th:utext="${expenses.note}">
+                    </a>
+                    <a data-toggle="modal" data-target="#noteModal" th:unless="${expenses.note}">
+                        Click to edit
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="noteModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" name="" id="inputNote" class="form-control" th:value="${expenses.note}"
+                                           required="required" pattern="" title="">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveNote()">Save
+                                        changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <th style="text-align: left;">Recurring</th>
+                <td style="text-align: left; width: 50%;">
+                    <!-- Button trigger modal -->
+                    <a data-toggle="modal" data-target="#recurringModal" th:if="${expenses.recurring}" th:utext="${expenses.recurring}">
+                    </a>
+                    <a data-toggle="modal" data-target="#recurringModal" th:unless="${expenses.recurring}">
+                        Click to edit
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="recurringModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="number" name="" id="inputRecurring" class="form-control" th:value="${expenses.recurring}"
+                                           required="required" pattern="" title="">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveRecurring()">Save
+                                        changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+              </tr>
+<!--              <tr>-->
+<!--                <th style="text-align: left;">Bank Account</th>-->
+<!--                <td>-->
+<!--                    &lt;!&ndash; Button trigger modal &ndash;&gt;-->
+<!--                    <a data-toggle="modal" data-target="#noteModal" th:if="${expenses.b}" th:utext="${expenses.note}">-->
+<!--                    </a>-->
+<!--                    <a data-toggle="modal" data-target="#noteModal" th:unless="${expenses.note}">-->
+<!--                        Click to edit-->
+<!--                    </a>-->
+<!--                    &lt;!&ndash; Modal &ndash;&gt;-->
+<!--                    <div class="modal fade" id="noteModal" tabindex="-1" role="dialog"-->
+<!--                         aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--                        <div class="modal-dialog" role="document">-->
+<!--                            <div class="modal-content">-->
+<!--                                <div class="modal-header">-->
+<!--                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                                        <span aria-hidden="true">&times;</span>-->
+<!--                                    </button>-->
+<!--                                </div>-->
+<!--                                <div class="modal-body">-->
+<!--                                    <input type="text" name="" id="inputNameCustomer" class="form-control" th:value="${expenses.note}"-->
+<!--                                           required="required" pattern="" title="">-->
+<!--                                </div>-->
+<!--                                <div class="modal-footer">-->
+<!--                                    <button type="button" class="btn btn-secondary"-->
+<!--                                            data-dismiss="modal">Close</button>-->
+<!--                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save-->
+<!--                                        changes</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--              </tr>-->
+          </table>
+
+          <div class="card">
+            <div class="card-header" style="background-color:  #28a745; color: #f2ffe1; font-size: large; font-weight: bold; ">
+              Attachment
+            </div>
+            <div class="card-body">
+              <p class="card-text">No result</p>
+              <input type="file"  class="btn btn-success btn-sm"/>
+            </div>
+          </div>
+
+          <div>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active " data-toggle="tab" href="#nav-customer" role="tab"
+                        aria-controls="nav-home" aria-selected="true">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        Customer
+                    </a>
+                    <a class="nav-item nav-link" id="nav-invoices-tab" data-toggle="tab" href="#nav-invoices" role="tab"
+                        aria-controls="nav-invoices" aria-selected="false">
+                        <i class="fa fa-file" aria-hidden="true"></i>
+                        Invoices
+                    </a>
+                    <a class="nav-item nav-link" id="nav-taxes-tab" data-toggle="tab" href="#nav-taxes" role="tab"
+                        aria-controls="nav-taxes" aria-selected="false">
+                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                        Taxes
+                    </a>
+                </div>
+            </nav>
+            <br/>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-customer" role="tabpanel" aria-labelledby="nav-customer-tab">
+                    <a href="/user/customer/new" class="btn btn-success btn-sm">New Customer</a>
+                    <a href="#" class="btn btn-success btn-sm">Assign Customer</a>
+                </div>
+                <div class="tab-pane fade" id="nav-invoices" role="tabpanel" aria-labelledby="nav-invoices-tab">
+                    <a href="/user/invoice/new" class="btn btn-success btn-sm">New Invoice</a>
+                    <a href="#" class="btn btn-success btn-sm">Assign Invoice</a>
+                </div>
+                <div class="tab-pane fade" id="nav-taxes" role="tabpanel" aria-labelledby="nav-taxes-tab">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/><br/><br/>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Optional JavaScript -->
+    <script type="text/javascript" src="/table_to_excel.js"></script>
+    <script type="text/javascript" src="/expensesDetail.js">
+    </script>
+    <script type="text/javascript">
+        $("#btnPrintExcel").click(function () {
+            $("#tblAgingReport").table2excel({
+                exclude: ".noExl",
+                name: "Worksheet Name",
+                filename: "AgingReport",
+                fileext: ".xls"
+            });
+        });
+    </script>
+</body>
+
+</html>

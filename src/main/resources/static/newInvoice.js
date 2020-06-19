@@ -1,4 +1,4 @@
-var listProduct;
+var listProduct = new Array();
 var listTax =  new Array();
 var listItem = new Array();
 var subTotal;
@@ -182,6 +182,7 @@ function saveInvoice(){
                         dataType: 'json',
                         success: function(newListPayment) {
                             alert("Success");
+                            window.location="/";
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             // Fail
@@ -567,9 +568,9 @@ $("#btnAddItem").click(function(){
         +'</div>'
         +'</div>'
         +'</td>'
-        +'<td><input type="number" name="" id="inputItemQuantity'+index+'" class="form-control" value="1" required="required" onchange="change();" ></td>'
-        +'<td><input type="text" name="" id="inputItemUnitPrice'+index+'" class="form-control" value="0" required="required"  disabled></td>'
-        +'<td><input type="text" name="" id="inputItemTotal'+index+'" class="form-control" value="0" required="required"  disabled></td>'
+        +'<td><input type="number" name="" id="inputItemQuantity'+index+'" class="form-control" value="1" required="required" onchange="change();" style="text-align: right"></td>'
+        +'<td><input type="number" name="" id="inputItemUnitPrice'+index+'" class="form-control" value="0" required="required"  disabled style="text-align: right"></td>'
+        +'<td><input type="number" name="" id="inputItemTotal'+index+'" class="form-control" value="0" required="required"  disabled style="text-align: right"></td>'
         +'</tr>'
     );
     var idListProduct = "#listProduct"+index;

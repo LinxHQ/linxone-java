@@ -18,7 +18,7 @@ public class CustomerService {
 	@Autowired CustomerRepository customerRepo;
 	
 	public List<Customer> getAll(){
-		logger.info("Size: "+customerRepo.findAll().size());
+//		logger.info("Size: "+customerRepo.findAll().size());
 		return customerRepo.findAll();
 	}
 	
@@ -28,7 +28,7 @@ public class CustomerService {
 	
 	public Customer add(Customer customer) {
 		Customer customer1 = customerRepo.save(customer);
-		logger.info("Customer"+customer1.getName()+customer1.getId());
+//		logger.info("Customer"+customer1.getName()+customer1.getId());
 		return customer1;
 	}
 	

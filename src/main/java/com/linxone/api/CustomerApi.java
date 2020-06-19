@@ -47,12 +47,12 @@ public class CustomerApi {
             }catch(Exception e) {
                 e.printStackTrace();
             }
-            JasperReport jr = JasperCompileManager.compileReport("D:/SpringIntellij/src/main/resources/static/Customer.jrxml");
+            JasperReport jr = JasperCompileManager.compileReport("D:/Spring_Intellij/SpringIntellij/src/main/resources/static/Customer.jrxml");
 //            Map<String, Object> parameters = new HashMap<String, Object>();
 //            parameters.put("idBill", idBill);
             JasperPrint jp = JasperFillManager.fillReport(jr, new HashMap<>(), con);
 
-            String urlResult = "D:/SpringIntellij/reports/customerReport.pdf";
+            String urlResult = "D:/Spring_Intellij/SpringIntellij/reports/customerReport.pdf";
             JasperExportManager.exportReportToPdfFile(jp, urlResult);
 
             File file = new File(urlResult);

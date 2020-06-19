@@ -14,15 +14,19 @@ import javax.validation.Valid;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/apis")
 public class BaseApi {
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
     MyUserDetailsService myUserDetailsService;
     @Autowired
-    JwtProvider jwtProvider;
+    JwtTokenProvider jwtTokenProvider;
 
+
+    @RequestMapping("/apis/test")
+    public ResponseEntity<String> test(){
+        return new ResponseEntity<>("Hello", HttpStatus.OK);
+    }
 
     @PostMapping("/signin")
     public ResponseEntity<JwtResponse> signin(@RequestBody JwtRequest jwtRequest){
@@ -34,7 +38,7 @@ public class BaseApi {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String jwt = jwtProvider.generateJwt((MyUserDetails) authentication.getPrincipal());
+        String jwt = jwtTokenProvider.createToken(((MyUserDetails) authentication.getPrincipal()).getUsername());
         JwtResponse jwtResponse = new JwtResponse(jwt);
         return new ResponseEntity<>(jwtResponse, HttpStatus.ACCEPTED);
     }

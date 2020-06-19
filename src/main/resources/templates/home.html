@@ -23,7 +23,7 @@
                     <a class="nav-link" href="/user/invoice/">Invoices <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Expenses</a>
+                    <a class="nav-link" href="/user/expenses">Expenses</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contracts</a>
@@ -139,22 +139,30 @@
             </div>
         </div>
         <table class="table">
-            <tbody>
-                <tr th:each ="invoice : ${invoices}">
-                    <th><span class="badge badge-pill badge-secondary" th:utext="${invoice.encode}"></span></th>
-                    <td th:utext="${invoice.date}"></td>
-                    <th th:utext="${invoice.customer.name}"></th>
-                    <td th:utext="${invoice.totalPaid}" style="color: green"></td>
-                    <td th:utext="${invoice.totalOutstanding}" style="color: #ffc107"></td>
-                    <td><a th:href="@{'/user/invoice/'+${invoice.id}}">View detail</a></td>
-                </tr>
+            <tbody id="tblInvoice">
+<!--                <tr th:each ="invoice : ${invoices}">-->
+<!--                    <th><span class="badge badge-pill badge-secondary" th:utext="${invoice.encode}"></span></th>-->
+<!--                    <td th:utext="${invoice.date}"></td>-->
+<!--                    <th th:utext="${invoice.customer.name}"></th>-->
+<!--                    <td th:utext="${invoice.totalPaid}" style="color: green"></td>-->
+<!--                    <td th:utext="${invoice.totalOutstanding}" style="color: #ffc107"></td>-->
+<!--                    <td><a th:href="@{'/user/invoice/'+${invoice.id}}">View detail</a></td>-->
+<!--                </tr>-->
             </tbody>
         </table>
+        <br/>
+        <div class="col-md-4 offset-md-8" id="pagination">
+
+        </div>
     </div>    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Optional JavaScript -->
+    <script type="text/javascript" src="/home.js"></script>
   </body>
 </html>

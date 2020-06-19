@@ -34,7 +34,7 @@
                         <a class="nav-link" href="/user/invoice/">Invoices <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Expenses</a>
+                        <a class="nav-link" href="/user/expenses">Expenses</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contracts</a>
@@ -382,9 +382,9 @@
                                     </div>
                                 </div>
                             </td>
-                            <td><input type="number" name="" id="inputItemQuantity1" class="form-control" value="1" required="required"  onchange="change();"></td>
-                            <td><input type="number" name="" id="inputItemUnitPrice1" class="form-control" value="0" required="required" disabled></td>
-                            <td><input type="number" name="" id="inputItemTotal1" class="form-control" value="0" required="required" disabled></td>
+                            <td><input type="number" name="" id="inputItemQuantity1" class="form-control" value="1" required="required"  onchange="change();" style="text-align: right"></td>
+                            <td><input type="number" name="" id="inputItemUnitPrice1" class="form-control" value="0" required="required" disabled style="text-align: right"></td>
+                            <td><input type="number" name="" id="inputItemTotal1" class="form-control" value="0" required="required" disabled style="text-align: right"></td>
                           </tr>
                         </tbody>
                     </table>
@@ -400,7 +400,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6" style="font-weight: bolder;">Sub total:</div>
-                                    <div class="col-md-6"><input type="number" name="" id="inputSubTotal" class="form-control" value="0" required="required" disabled/></div>
+                                    <div class="col-md-6"><input type="number" name="" id="inputSubTotal" class="form-control" value="0" required="required" disabled style="text-align: right"/></div>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -427,7 +427,7 @@
                                             Total
                                         </th>
                                         <td>
-                                            <input type="number" name="" id="total" class="form-control" value="" required="required" disabled>
+                                            <input type="number" name="" id="total" class="form-control" value="" required="required" disabled style="text-align: right"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -435,7 +435,7 @@
                                         </td>
                                         <th>Paid</th>
                                         <td>
-                                            <input type="number" name="" id="inputPaid" class="form-control" value="0" required="required" disabled>
+                                            <input type="number" name="" id="inputPaid" class="form-control" value="0" required="required" disabled style="text-align: right">
                                         </td>
                                     </tr>
                                     <tr>
@@ -443,7 +443,7 @@
                                         </td>
                                         <th>Outstanding</th>
                                         <td>
-                                            <input type="number" name="" id="inputOutstanding" class="form-control" value=""  disabled/>
+                                            <input type="number" name="" id="inputOutstanding" class="form-control" value=""  disabled style="text-align: right"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -561,13 +561,9 @@
         <div class="row pt-3 pb-3">
             <div class="col-md-3"></div>
             <div class="col--md-6">
-                <button class="btn btn-success" onclick="saveInvoice();">Save</button>
+                <button class="btn btn-success" onclick="saveInvoice();">Create invoice</button>
             </div>
         </div>
-    </div>
-
-    <div class="container-fluid bg-dark pt-2">
-        <div style="color: white">Sunchinsusu</div>
     </div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

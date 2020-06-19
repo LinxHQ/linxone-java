@@ -31,6 +31,16 @@ public class BaseController {
 	public String payment() {
 		return "newPayment";
 	}
+
+	@RequestMapping(value = "/user/expenses")
+	public String expenses() {
+		return "expenses";
+	}
+
+	@RequestMapping(value = "/user/expenses/create")
+	public String addExpenses() {
+		return "new_expenses";
+	}
 	
 //	@RequestMapping("/login")
 //	public String login() {

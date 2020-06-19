@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body style="font-family: Arial;">
+<!--    Navbar-->
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="height: 2.5em;">
+        <a class="navbar-brand pl-5" href="#">
+            <i class="fa fa-home" aria-hidden="true"></i>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="/user/invoice/">Invoices <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/user/expenses">Expenses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contracts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Quotations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/report">Report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/customer/">Customers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/payment">Payments</a>
+                </li>
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">...</a>
+                </li>
+            </ul>
+            <div class="form-inline my-2 my-lg-0 pr-5">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-suitcase" aria-hidden="true"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="..." alt="..." class="rounded-circle">
+                </a> -->
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<br />
+<div class="container">
+    <!--        Search-->
+    <div class="row pt-3">
+        <div class="col-md-3">
+            <legend class="font-weight-bold" style="color: green;">New Expenses</legend>
+        </div>
+        <div class="col-md-2 offset-sm-7">
+            <a href="/user/expenses" type="button" class="btn btn-secondary btn-sm">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                Back
+            </a>
+        </div>
+    </div>
+    <hr>
+    <br />
+
+    <div class="card">
+        <div div class="card-header" style="background-color:  #28a745;">
+            <a style="color: #f2ffe1;font-size: medium; font-weight: bold;" data-toggle="collapse"
+               href="#collapseBasicInfor" role="button" aria-expanded="false" aria-controls="collapseBasicInfor">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                Basic Information
+            </a>
+        </div>
+        <div class="collapse" id="collapseBasicInfor">
+            <div class="card card-body">
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label" style="text-align: right;">Expenses No
+                        *
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="inputNo" value="E-20200000026"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" style="text-align: right;">Category *
+                    </label>
+                    <div class="col-md-4">
+                        <select name="" id="selectCategory" class="form-control" required="required">
+                            <option value="0">Office Stationaries</option>
+                            <option value="1">Bussiness traveling</option>
+                            <option value="2">Convayance</option>
+                            <option value="3">Hanif Munshi - Salary</option>
+                            <option value="4">Office Rent</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label" style="text-align: right;">Date
+                        *</label>
+                    <div class="col-md-4">
+                        <input type="date" class="form-control" id="inputDate">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label" style="text-align: right;">Amount
+                        (incl. Tax) *
+                    </label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" id="inputAmount">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label"
+                           style="text-align: right;">Note</label>
+                    <div class="col-md-4">
+                            <textarea type="email" class="form-control" id="inputNote"
+                                      style="height: 120%;"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"
+                           style="text-align: right;">Attachments</label>
+                    <div class="col-md-4">
+                        <input type="file" id="inputAttachments" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="card">
+        <div div class="card-header" style="background-color:  #28a745; ">
+            <a style="color: #f2ffe1; font-size: medium; font-weight: bold;" data-toggle="collapse"
+               href="#collapseContact" role="button" aria-expanded="false" aria-controls="collapseContact">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                Optional Information
+            </a>
+        </div>
+        <div class="collapse" id="collapseContact">
+            <div class="card card-body">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"
+                           style="text-align: right;">Customer/Vendor
+                    </label>
+                    <div class="col-md-4">
+                        <select name="" id="selectCustomer" class="form-control" required="required" onchange="changeCustomer()">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label" style="text-align: right;">Invoice
+                    </label>
+                    <div class="col-md-4">
+                        <select name="" id="selectInvoice" class="form-control" required="required">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" style="text-align: right;">Bank
+                        Account
+                    </label>
+                    <div class="col-md-4">
+                        <select name="" id="selectBank" class="form-control" required="required">
+
+                        </select>
+                    </div>
+                </div>
+                <div id="listTax">
+                    <div class="form-group row" id="tax_1">
+                        <label class="col-sm-2 col-form-label" style="text-align: right;">Taxes
+                        </label>
+                        <div class="col-md-4">
+                            <select name="" id="selectTax1" class="form-control" required="required">
+
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" value="" />
+                        </div>
+                        <div class="col-md-2">
+                            <a href="#" onclick="moreTaxClick()"><i class="fa fa-plus-circle" aria-hidden="true"
+                                                                    onclick="moreTaxClick()"></i>More tax</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br /><br />
+    <div class="row">
+        <div class="col-sm-2 offset-sm-3">
+            <button type="button" class="btn btn-outline-success btn-sm" onclick="btnSaveClick()" style="width: 100%">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Save
+            </button>
+        </div>
+        <div class="col-sm-2">
+            <a href="/user/expenses" type="button" class="btn btn-outline-secondary btn-sm" style="width: 100%">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                Back
+            </a>
+        </div>
+    </div>
+    <br /><br />
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<!-- ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Optional JavaScript -->
+
+<script type="text/javascript" src="/newExpenses.js"></script>
+</body>
+
+</html>

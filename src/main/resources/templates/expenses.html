@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        #borderRadius{
+            border-radius: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--    Navbar-->
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="height: 2.5em;">
+            <a class="navbar-brand pl-5" href="#">
+                <i class="fa fa-home" aria-hidden="true"></i>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/user/invoice/">Invoices <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/user/expenses">Expenses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contracts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Quotations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/report">Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/customer/">Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/payment">Payments</a>
+                    </li>
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">...</a>
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0 pr-5">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-suitcase" aria-hidden="true"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="..." alt="..." class="rounded-circle">
+                    </a> -->
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="container">
+        <!--        Search-->
+        <div class="row pt-3 pb-0">
+            <div class="col-md-2">
+                <legend class="font-weight-bold" style="color: green;">Expenses</legend>
+            </div>
+            <div class="col-md-2 offset-md-8" style="font-size: larger">
+                <a href="/user/expenses/create" class="secondary">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </a>
+                <a href="#" class="secondary ml-3">
+                    <i class="fa fa-print" aria-hidden="true" onclick="btnPrintClick()"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <table class="table" >
+                <tr>
+                    <th style="text-align: right;">Category: </th>
+                    <td>
+                        <select name="" id="selectCategory" class="form-control" required="required" style="border-radius: 20px;">
+                            <option value="-1">All</option>
+                            <option value="OFFICE_STATIONARIS">Office Stationaries</option>
+                            <option value="BUSSINESS_TRAVELING">Bussiness traveling</option>
+                            <option value="CONVAYANCE">Convayance</option>
+                            <option value="HANIF_MUNSHI_SALARY">Hanif Munshi - Salary</option>
+                            <option value="OFFICE_RENT">Office Rent</option>
+                        </select>
+                    </td>
+                    <th style="text-align: right;">From: </th>
+                    <td>
+                        <input type="date" id="inputFrom" class="form-control" style="border-radius: 20px;"/>
+                    </td>
+                    <th style="text-align: right;">To: </th>
+                    <td>
+                        <input type="date" id="inputTo" class="form-control" style="border-radius: 20px;"/>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary" style="border-radius: 20px;" onclick="btnSearchClick()">Search</button>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="table mt-2" id="tblEx">
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Expenses No</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Total</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody id="tblExpenses">
+
+                </tbody>
+              </table>
+            <br/>
+            <div class="col-md-5 offset-md-7" id="pagination">
+
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Optional JavaScript -->
+    <script type="text/javascript" src="/table_to_excel.js"></script>
+    <script type="text/javascript" src="/expenses.js"></script>
+    <script type="text/javascript">
+        function btnPrintClick(){
+            $("#tblEx").table2excel({
+                exclude:".noExl",
+                name:"Worksheet Name",
+                filename:"Expenses",
+                fileext:".xls"
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -6,24 +6,29 @@ var paymentTotal = 0;
 function searchClick(){
     $("#content").empty();
     var customerId = $("#selectCustomerView").val();
-    var startDate = new Date($("#inputStartDate").val());
-    var endDate = new Date($("#inputEndDate").val());
-    if(customerId == -1){
-        for(var i = 0; i < listCustomer.length; i++){
-            //tao the div bao quanh moi customer
-            $("#content").append(
-                '<br/><br/><br/>'
-                +'<div id="customer'+listCustomer[i].id+'"></div>'
-            );
-            showCustomer(listCustomer[i].id, startDate, endDate);
-        }
+    if($("#inputStartDate").val().length == 0 || $("#inputEndDate").val().length ==0){
+        alert("Fill start date and end date to search, please!")
     }
     else{
-        $("#content").append(
-            '<br/><br/><br/>'
-            +'<div id="customer'+customerId+'"></div>'
-        );
-        showCustomer(customerId, startDate, endDate);
+        var startDate = new Date($("#inputStartDate").val());
+        var endDate = new Date($("#inputEndDate").val());
+        if(customerId == -1){
+            for(var i = 0; i < listCustomer.length; i++){
+                //tao the div bao quanh moi customer
+                $("#content").append(
+                    '<br/><br/><br/>'
+                    +'<div id="customer'+listCustomer[i].id+'"></div>'
+                );
+                showCustomer(listCustomer[i].id, startDate, endDate);
+            }
+        }
+        else{
+            $("#content").append(
+                '<br/><br/><br/>'
+                +'<div id="customer'+customerId+'"></div>'
+            );
+            showCustomer(customerId, startDate, endDate);
+        }
     }
 }
 
