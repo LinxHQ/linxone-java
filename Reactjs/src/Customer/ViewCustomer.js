@@ -5,7 +5,7 @@ import { Icon, Label, Table } from 'semantic-ui-react'
 import myAxios from '../myAxios';
 import { Container, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import EditAddress from './EditAddress';
-import Header from './../Component/Header';
+import Header from '../Component/Header';
 import EditContact from './EditContact';
 import "./ViewCustomer.scss";
 const { TabPane } = Tabs;
