@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Headers from '../../Component/Header';
 import TblExpenses from './TblExpenses';
 import myAxios from '../../myAxios';
+import { Skeleton } from 'antd';
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 class Expenses extends Component {
     constructor(props) {
@@ -35,33 +37,6 @@ class Expenses extends Component {
                     </div>
                 </div>
                 <TblExpenses />
-                <br />
-                {/* <Nav tabs>
-                    <NavItem>
-                        <NavLink href="#" active>Link</NavLink>
-                    </NavItem>
-                    <Dropdown nav isOpen={dropdownOpen} toggle={toggle}>
-                        <DropdownToggle nav caret>
-                            Dropdown
-                    </DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem header>Header</DropdownItem>
-                            <DropdownItem disabled>Action</DropdownItem>
-                            <DropdownItem>Another Action</DropdownItem>
-                            <DropdownItem divider />
-                            <DropdownItem>Another Action</DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
-                    <NavItem>
-                        <NavLink href="#">Link</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="#">Another Link</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink disabled href="#">Disabled Link</NavLink>
-                    </NavItem>
-                </Nav> */}
             </div>
         );
     }

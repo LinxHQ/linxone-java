@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../../../Component/Header';
 import myAxios from '../../../myAxios';
 import RowExpenses from './RowExpenses';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table, Card, CardHeader, CardBody, CardTitle, Input, Container, Row, Col } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table, Card, CardHeader, CardBody, CardTitle, Input, Container, Row, Col, Spinner } from 'reactstrap';
 import { Tabs } from 'antd';
 import Icon from '@ant-design/icons';
 
@@ -11,6 +11,7 @@ class DetailExpenses extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: false,
             type: '',
             value: '',
             openModal: false,
@@ -19,38 +20,66 @@ class DetailExpenses extends Component {
     }
 
     async componentDidMount() {
-        myAxios.get('/expenses/' + this.props.match.params.id)
-            .then(res => {
-                const expenses = res.data;
-                this.setState({
-                    expenses: expenses
-                });
-            })
-            .catch(error => alert("Error"));
+        this.setState({
+            loading: true
+        });
+        setTimeout(() => {
+            myAxios.get('/expenses/' + this.props.match.params.id)
+                .then(res => {
+                    const expenses = res.data;
+                    this.setState({
+                        expenses: expenses
+                    });
+                    this.setState({
+                        loading: false
+                    });
+                })
+                .catch(error => alert("Error"));
+        }, 1000);
     }
 
     changeCallBackHandle = (name, value) => {
-        const newExpenses = this.state.expenses;
-        newExpenses[name] = value;
-        this.setState(prevState => ({
-            expenses: {
-                ...prevState.expenses,
-                [name]: value
-            }
+        this.setState({
+            loading: true
+        });
+        setTimeout(() => {
+            const newExpenses = this.state.expenses;
+            newExpenses[name] = value;
+            this.setState(prevState => ({
+                expenses: {
+                    ...prevState.expenses,
+                    [name]: value
+                }
 
-        }));
-        const url = '/expenses/update';
-        myAxios.post(url, newExpenses)
-            .then(res => {
-                alert("Update Success");
-            })
-            .catch(error => alert("Error"));
+            }));
+            const url = '/expenses/update';
+            myAxios.post(url, newExpenses)
+                .then(res => {
+                    this.setState({
+                        loading: false
+                    })
+                })
+                .catch(error => alert("Error"));
+        }, 1000)
+
     }
 
-    render() {
-        return (
-            <div>
-                <Header />
+    changeFile=(event)=>{
+        console.log(event.target.value);
+    }
+
+    renderContent = () => {
+        if (this.state.loading == true) {
+            return (
+                <div className="container mt-4">
+                    <div className="row justify-content-center" style={{paddingTop:"20%"}}>
+                        <Spinner color="success" >Loading...</Spinner>
+                    </div>
+                </div>
+            );
+        }
+        else {
+            return (
                 <div className="container">
                     {/*        Search*/}
                     <div className="row pt-3 pb-0">
@@ -60,12 +89,12 @@ class DetailExpenses extends Component {
                         <div className="col-md-3 offset-md-7">
                             <a href="/expenses" type="button" className="btn btn-secondary btn-sm">
                                 <i className="fa fa-arrow-left" aria-hidden="true" />
-                                Back
-                            </a>
+                Back
+            </a>
                             <a href="/expenses/new" type="button" className="btn btn-secondary btn-sm ml-2">
                                 <i className="fa fa-plus" aria-hidden="true" />
-                                New
-                            </a>
+                New
+            </a>
                         </div>
                     </div>
                     <hr />
@@ -128,7 +157,7 @@ class DetailExpenses extends Component {
                     <Card>
                         <CardHeader style={{ backgroundColor: "green", fontWeight: "bold", color: "white" }}>Header</CardHeader>
                         <CardBody>
-                            <Input type="file" name="file" id="exampleFile" />
+                            <Input type="file" name="file" id="exampleFile" onChange={this.changeFile}/>
                         </CardBody>
                     </Card>
                     <br />
@@ -139,12 +168,12 @@ class DetailExpenses extends Component {
                                     <Tabs type="card">
                                         <TabPane key="1" tab={<Icon disabled name='arrow circle right' />}></TabPane>
                                         <TabPane tab="Customer" key="2">
-                                            <Button style={{ backgroundColor: "green"}}>New Customer</Button>
-                                            <Button style={{ backgroundColor: "green",marginLeft:"2%"}}>Assign Customer</Button>
+                                            <Button style={{ backgroundColor: "green" }}>New Customer</Button>
+                                            <Button style={{ backgroundColor: "green", marginLeft: "2%" }}>Assign Customer</Button>
                                         </TabPane>
                                         <TabPane tab="Invoice" key="3">
-                                            <Button style={{ backgroundColor: "green"}}>New Invoice</Button>
-                                            <Button style={{ backgroundColor: "green",marginLeft:"2%"}}>Assign Invoice</Button>
+                                            <Button style={{ backgroundColor: "green" }}>New Invoice</Button>
+                                            <Button style={{ backgroundColor: "green", marginLeft: "2%" }}>Assign Invoice</Button>
                                         </TabPane>
                                         <TabPane tab="Taxes" key="4">
 
@@ -155,6 +184,19 @@ class DetailExpenses extends Component {
                         </Row>
                     </Container>
                 </div>
+            )
+        }
+    }
+
+    render() {
+
+        return (
+            <div>
+                <Header />
+                {
+                    this.renderContent()
+                }
+
 
             </div>
         );

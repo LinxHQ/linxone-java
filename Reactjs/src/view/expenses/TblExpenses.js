@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom'
 import myAxios from '../../myAxios';
 import FontAwesome from 'react-fontawesome';
 import { confirmAlert } from 'react-confirm-alert';
+import { SkeletonTheme } from 'react-loading-skeleton';
+import { Skeleton } from 'antd';
+import { Spinner } from 'reactstrap';
 
 const limit = 5;
 class TblExpenses extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: false,
             expenses: [],
             page: 1,
             category: 'x',
@@ -18,13 +22,20 @@ class TblExpenses extends Component {
     }
 
     async componentDidMount() {
-        myAxios.get('/expenses')
-            .then(res => {
-                this.setState({
-                    expenses: res.data
-                });
-            })
-            .catch(error => alert("Error"));
+        this.setState({
+            loading: true
+        });
+        setTimeout(() => {
+            myAxios.get('/expenses')
+                .then(res => {
+                    this.setState({
+                        expenses: res.data,
+                        loading: false
+                    });
+                })
+                .catch(error => alert("Error"));
+        }, 1000);
+
     }
 
 
@@ -56,15 +67,22 @@ class TblExpenses extends Component {
                 .catch(error => alert("Error"));
         }
         else {
-            let url = '/expenses/search/category/' + this.state.category + '/from/' + this.state.startDate + '/to/' + this.state.endDate;
-            myAxios.get(url)
-                .then(res => {
-                    this.setState({
-                        expenses: res.data,
-                        page: 1
-                    });
-                })
-                .catch(error => alert("Error"));
+            this.setState({
+                loading: true
+            })
+            setTimeout(() => {
+                const url = '/expenses/search/category/' + this.state.category + '/from/' + this.state.startDate + '/to/' + this.state.endDate;
+                myAxios.get(url)
+                    .then(res => {
+                        this.setState({
+                            expenses: res.data,
+                            page: 1,
+                            loading:false,
+                        });
+                    })
+                    .catch(error => alert("Error"));
+            }, 500)
+
         }
     }
 
@@ -110,7 +128,7 @@ class TblExpenses extends Component {
                         <td scope="row">{expense.date}</td>
                         <td>
                             {/* <a href={'/expenses/detail/' + expense.id}>{expense.no}</a> */}
-                            <Link to={'/expenses/detail/36'}>{expense.no}</Link>
+                            <Link to={'/expenses/detail/' + expense.id}>{expense.no}</Link>
                         </td>
                         <td>{expense.categoryExpenses}</td>
                         <td>{expense.note}</td>
@@ -144,8 +162,18 @@ class TblExpenses extends Component {
         });
     }
 
+
     render() {
-        return (
+        if (this.state.loading == true) {
+            return (
+                <div className="container mt-4">
+                    <div className="row justify-content-center" style={{paddingTop:"20%"}}>
+                        <Spinner color="success">Loading...</Spinner>
+                    </div>
+                </div>
+            );
+        }
+        else return (
             <div className="container mt-4">
                 <div className="row justify-content-center">
                     <table className="table">
